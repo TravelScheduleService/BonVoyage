@@ -5,6 +5,7 @@
 
   .inputLabel {
     font-size: 1.6rem;
+    color: var(--black20);
   }
 
   .inputBox {
@@ -15,6 +16,7 @@
     border-radius: 8px;
     border-color: var(--gray30);
     font-size: 1.6rem;
+    color: var(--black30);
   }
 
   .inputBox:focus {
