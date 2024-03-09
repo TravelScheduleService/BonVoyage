@@ -1,11 +1,11 @@
 :root {
   --white: #ffffff;
 
-  --Gray10: #fafafa;
-  --Gray20: #eeeeee;
-  --Gray30: #d9d9d9;
-  --Gray40: #9fa6b2;
-  --Gray50: #787468;
+  --gray10: #fafafa;
+  --gray20: #eeeeee;
+  --gray30: #d9d9d9;
+  --gray40: #9fa6b2;
+  --gray50: #787468;
 
   --black10: #4b4b4b;
   --black20: #333236;
@@ -24,6 +24,7 @@
 
 * {
   box-sizing: border-box;
+  font-size: 10px;
 }
 
 html {
@@ -39,7 +40,6 @@ body {
 }
 
 body,
-
 input,
 a {
   all: unset;

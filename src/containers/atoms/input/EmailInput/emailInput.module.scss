@@ -1,0 +1,23 @@
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .inputLabel {
+    font-size: 1.6rem;
+  }
+
+  .inputBox {
+    border: 1px solid;
+    width: 520px;
+    height: 27px;
+    padding: 15.5px 16px;
+    border-radius: 8px;
+    border-color: var(--gray30);
+    font-size: 1.6rem;
+  }
+
+  .inputBox:focus {
+    border-color: var(--blue30);
+  }
+}
