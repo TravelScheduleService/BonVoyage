@@ -1,24 +1,24 @@
 import { useState } from "react";
-import styles from "./passwordInput.module.scss";
+import styles from "./passwordConfirmInput.module.scss";
 import Image from "next/image";
 import eyeOffIcon from "../../../../../public/assets/icon/eyeOffIcon.svg";
 import eyeOnIcon from "../../../../../public/assets/icon/eyeOnIcon.svg";
 
-export default function PasswordInput() {
-  const [password, setPassword] = useState<string>("");
-  const [isValid, setIsValid] = useState<boolean>(true);
+export default function PasswordConfirmInput(password: string) {
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [isSame, setIsSame] = useState<boolean>(true);
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newPassword = e.target.value;
-    setPassword(newPassword);
+    setConfirmPassword(newPassword);
   };
 
   const handleBlur = (): void => {
-    if (password.length < 8) {
-      setIsValid(false);
+    if (confirmPassword === password) {
+      setIsSame(false);
     } else {
-      setIsValid(true);
+      setIsSame(true);
     }
   };
 
@@ -27,12 +27,12 @@ export default function PasswordInput() {
   };
   return (
     <div className={styles["inputForm"]}>
-      <label className={styles["inputLabel"]}>비밀번호</label>
+      <label className={styles["inputLabel"]}>비밀번호 확인</label>
       <input
-        className={`${styles["inputBox"]} ${isValid ? "" : styles["invalid"]}`}
-        placeholder="비밀번호를 입력해 주세요"
+        className={`${styles["inputBox"]} ${isSame ? "" : styles["invalid"]}`}
+        placeholder="비밀번호를 한번 더 입력해 주세요"
         type={isClicked ? "text" : "password"}
-        value={password}
+        value={confirmPassword}
         onChange={handleInputChange}
         onBlur={handleBlur}
       ></input>
@@ -42,8 +42,10 @@ export default function PasswordInput() {
         src={isClicked ? eyeOnIcon : eyeOffIcon}
         alt="EyeIcon"
       ></Image>
-      {!isValid && (
-        <span className={styles["errorMsg"]}>8자 이상 입력해 주세요.</span>
+      {!isSame && (
+        <span className={styles["errorMsg"]}>
+          비밀번호가 일치하지 않습니다.
+        </span>
       )}
     </div>
   );

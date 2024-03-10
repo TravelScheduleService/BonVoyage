@@ -1,4 +1,5 @@
 import EmailInput from "@/containers/atoms/input/EmailInput/EmailInput";
+import PasswordConfirmInput from "@/containers/atoms/input/PasswordConfirmInput/passwordConfirmInput";
 import PasswordInput from "@/containers/atoms/input/PasswordInput/PasswordInput";
 
 import React from "react";
@@ -12,6 +13,7 @@ const index = () => {
       index
       <EmailInput></EmailInput>
       <PasswordInput></PasswordInput>
+      <PasswordConfirmInput></PasswordConfirmInput>
     </div>
   );
 };
