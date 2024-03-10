@@ -1,4 +1,5 @@
 import EmailInput from "@/containers/atoms/input/EmailInput/EmailInput";
+import NicknameInput from "@/containers/atoms/input/NicknameInput/NicknameInput";
 import PasswordConfirmInput from "@/containers/atoms/input/PasswordConfirmInput/passwordConfirmInput";
 import PasswordInput from "@/containers/atoms/input/PasswordInput/PasswordInput";
 
@@ -14,6 +15,7 @@ const index = () => {
       <EmailInput></EmailInput>
       <PasswordInput></PasswordInput>
       <PasswordConfirmInput></PasswordConfirmInput>
+      <NicknameInput></NicknameInput>
     </div>
   );
 };

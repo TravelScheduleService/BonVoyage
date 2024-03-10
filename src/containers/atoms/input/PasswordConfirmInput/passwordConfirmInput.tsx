@@ -4,7 +4,11 @@ import Image from "next/image";
 import eyeOffIcon from "../../../../../public/assets/icon/eyeOffIcon.svg";
 import eyeOnIcon from "../../../../../public/assets/icon/eyeOnIcon.svg";
 
-export default function PasswordConfirmInput(password: string) {
+interface Props {
+  password: string;
+}
+
+export default function PasswordConfirmInput({ password }: Props) {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isSame, setIsSame] = useState<boolean>(true);
   const [isClicked, setIsClicked] = useState<boolean>(false);
