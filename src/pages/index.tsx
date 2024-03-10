@@ -1,23 +1,7 @@
-import EmailInput from "@/containers/atoms/input/EmailInput/EmailInput";
-import NicknameInput from "@/containers/atoms/input/NicknameInput/NicknameInput";
-import PasswordConfirmInput from "@/containers/atoms/input/PasswordConfirmInput/passwordConfirmInput";
-import PasswordInput from "@/containers/atoms/input/PasswordInput/PasswordInput";
-
 import React from "react";
 
-// const index = () => {
-//   return <div>index</div>;
-// };
 const index = () => {
-  return (
-    <div>
-      index
-      <EmailInput></EmailInput>
-      <PasswordInput></PasswordInput>
-      <PasswordConfirmInput></PasswordConfirmInput>
-      <NicknameInput></NicknameInput>
-    </div>
-  );
+  return <div>index</div>;
 };
 
 export default index;
