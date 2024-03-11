@@ -1,8 +1,13 @@
-import SideBar from "@/containers/atoms/sideBar/SideBar";
-import React from "react";
+import SideBar from '@/containers/atoms/sideBar/SideBar';
+import React from 'react';
 
 const index = () => {
-  return <div>index</div>;
+  return (
+    <div>
+      index
+      <SideBar></SideBar>
+    </div>
+  );
 };
 
 export default index;
