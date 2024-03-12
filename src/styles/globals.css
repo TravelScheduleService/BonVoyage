@@ -5,7 +5,7 @@
   --gray20: #eeeeee;
   --gray30: #d9d9d9;
   --gray40: #9fa6b2;
-  --gray50: #787468;
+  --gray50: #787486;
 
   --black10: #4b4b4b;
   --black20: #333236;
@@ -35,7 +35,7 @@ body {
   padding: 0;
   margin: 0;
   font-size: 10px;
-  font-family: "Pretendard", Helvetica;
+  font-family: 'Pretendard', Helvetica;
 }
 
 body,
