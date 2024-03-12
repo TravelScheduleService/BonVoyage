@@ -1,22 +1,10 @@
-<<<<<<< HEAD
-import SideBar from '@/containers/atoms/sideBar/SideBar';
-=======
-
->>>>>>> 950ddf863a94014e9fc1d2989a1ba7896bbf24f9
 import React from 'react';
 
 const index = () => {
   return (
-<<<<<<< HEAD
-    <div>
-      index
-      <SideBar></SideBar>
-    </div>
-=======
     <>
       <div>index</div>
     </>
->>>>>>> 950ddf863a94014e9fc1d2989a1ba7896bbf24f9
   );
 };
 
