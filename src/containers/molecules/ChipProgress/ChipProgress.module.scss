@@ -1,0 +1,24 @@
+.progress {
+  width: fit-content;
+  display: inline-flex;
+  padding: 4px 8px;
+  align-items: center;
+  gap: 6px;
+
+  border-radius: 11px;
+  background: var(--violet-violet-8, #f1effd);
+
+  span {
+    color: var(--blue50, #00387e);
+    text-align: center;
+    font-size: 0.8rem;
+
+    @media (min-width: 375px) {
+      font-size: 1rem;
+    }
+
+    @media (min-width: 769px) {
+      font-size: 1.2rem;
+    }
+  }
+}

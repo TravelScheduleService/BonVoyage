@@ -1,0 +1,47 @@
+@mixin color($bg-color, $text-color) {
+  background: $bg-color;
+
+  span {
+    color: $text-color;
+  }
+}
+
+.tag {
+  width: fit-content;
+  display: inline-flex;
+  padding: 4px 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 4px;
+
+  span {
+    text-align: center;
+    font-size: 1.1rem;
+
+    @media (min-width: 375px) {
+      font-size: 1.2rem;
+    }
+
+    @media (min-width: 769px) {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.orange {
+  @include color(#f9eee3, #d58d49);
+}
+
+.green {
+  @include color(#e7f7db, #86d549);
+}
+
+.pink {
+  @include color(#f7dbf0, #d549b6);
+}
+
+.blue {
+  @include color(#dbe6f7, #4981d5);
+}
