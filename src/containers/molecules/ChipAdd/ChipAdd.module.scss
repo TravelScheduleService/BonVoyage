@@ -1,0 +1,23 @@
+.addBox {
+  position: relative;
+  display: flex;
+  width: 18px;
+  height: 18px;
+  padding: 3px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  border-radius: 4px;
+  background: var(--violet-violet-8, #f1effd);
+
+  @media (min-width: 375px) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (min-width: 769px) {
+    width: 22px;
+    height: 22px;
+  }
+}
