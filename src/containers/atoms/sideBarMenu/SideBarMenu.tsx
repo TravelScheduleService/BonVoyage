@@ -10,15 +10,9 @@ interface SideBarMenuProps {
 
 export default function SideBarMenu({ menuTitle, path }: SideBarMenuProps) {
   return (
-    // <div className={styles['sidebarMenu']}>
-    //   <Link href={`"${path}"`}>
-    //     <a className={styles['menuTitle']}>{menuTitle}</a>
-    //   </Link>
-    //   <Image className={styles['crownIcon']} src={crownIcon}></Image>
-    // </div>
     <div className={styles['sidebarMenu']}>
       <Link href={`"${path}"`}>
-        <a className={styles['menuTitle']}>코드잇</a>
+        <a className={styles['menuTitle']}>{menuTitle}</a>
       </Link>
       <Image className={styles['crownIcon']} src={crownIcon}></Image>
     </div>
