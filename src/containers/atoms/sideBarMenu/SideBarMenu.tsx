@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import styles from './sideBarMenu.module.scss';
+import Image from 'next/image';
+import crownIcon from '../../../../public/assets/icon/crownIcon.svg';
 
 interface SideBarMenuProps {
   menuTitle: string;
@@ -8,10 +10,17 @@ interface SideBarMenuProps {
 
 export default function SideBarMenu({ menuTitle, path }: SideBarMenuProps) {
   return (
+    // <div className={styles['sidebarMenu']}>
+    //   <Link href={`"${path}"`}>
+    //     <a className={styles['menuTitle']}>{menuTitle}</a>
+    //   </Link>
+    //   <Image className={styles['crownIcon']} src={crownIcon}></Image>
+    // </div>
     <div className={styles['sidebarMenu']}>
       <Link href={`"${path}"`}>
-        <a className={styles['menuTitle']}>{menuTitle}</a>
+        <a className={styles['menuTitle']}>코드잇</a>
       </Link>
+      <Image className={styles['crownIcon']} src={crownIcon}></Image>
     </div>
   );
 }
