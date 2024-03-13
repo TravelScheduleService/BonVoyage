@@ -5,9 +5,9 @@ export default function ChipAdd() {
   return (
     <div className={styles['addBox']}>
       <Image
-        layout='fill'
-        src='/assets/image/plusIcon.svg'
-        alt='플러스 이미지'
+        layout="fill"
+        src="/assets/image/plusIcon.svg"
+        alt="플러스 이미지"
       />
     </div>
   );

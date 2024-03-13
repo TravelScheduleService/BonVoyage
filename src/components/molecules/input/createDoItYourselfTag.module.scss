@@ -1,0 +1,28 @@
+.tagContainer {
+  position: relative;
+}
+
+.underline {
+  width: 100%;
+  border-top: none;
+  border-bottom: 1px solid var(--gray30);
+  margin-bottom: 3px;
+}
+
+.tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-left: 13px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &.hasTags {
+    left: 100%; // 입력된 태그가 있을 때 오른쪽으로 이동
+    transform: translateX(calc(-100% - 7px)); // 오른쪽으로 태그 길이만큼 이동
+  }
+}
+
+.content {
+  margin-right: 110px; /* 태그가 입력됐을 때 오른쪽으로 이동 */
+}

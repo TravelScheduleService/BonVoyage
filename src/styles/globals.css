@@ -7,7 +7,6 @@
   --gray40: #9fa6b2;
   --gray50: #787486;
 
-
   --black10: #4b4b4b;
   --black20: #333236;
   --black30: #171717;
@@ -25,24 +24,23 @@
 
 * {
   box-sizing: border-box;
-  font-size: 10px;
 }
 
 html {
   height: 100%;
   font-size: 62.5%;
-
 }
 
 body {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: "Pretendard", Helvetica;
+  font-family: 'Pretendard', Helvetica;
 }
 
 body,
 input,
+textarea,
 a {
   all: unset;
 }
