@@ -7,16 +7,13 @@
 
   .authButton {
     display: flex;
+    flex-direction: row;
     gap: 20px;
     font-size: 1.4rem;
     cursor: pointer;
 
     @media (min-width: 375px) {
       font-size: 1.6rem;
-    }
-
-    Link {
-      display: flex;
     }
   }
 }
