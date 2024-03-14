@@ -1,0 +1,166 @@
+.background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  background: var(--gray10, #fafafa);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 16px 10px 16px 80px;
+
+  @media (min-width: 375px) {
+    padding: 24px 24px 24px 91px;
+  }
+
+  @media (min-width: 769px) {
+    padding: 40px 40px 0 200px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 40px 40px 0 340px;
+  }
+}
+
+.dashboardList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 13px;
+
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.invitedDashboardList {
+  max-width: 1022px;
+  min-height: 310px;
+  padding: 32px 28px 0;
+
+  border-radius: 8px;
+  background: var(--white, #fff);
+
+  @media (min-width: 375px) {
+    min-height: 400px;
+  }
+}
+
+.invitedDashboardList > span {
+  color: var(--black20, #333236);
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  @media (min-width: 375px) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 2.4rem;
+  }
+}
+
+.search {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 7px 12px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+
+  border-radius: 6px;
+  border: 1px solid var(--gray30, #d9d9d9);
+  background: var(--white, #fff);
+
+  input {
+    font-size: 1.4rem;
+  }
+
+  input::placeholder {
+    color: var(--gray40, #9fa6b2);
+  }
+
+  @media (min-width: 769px) {
+    height: 40px;
+
+    input {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.icon {
+  position: relative;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 10px;
+
+  @media (min-width: 375px) {
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (min-width: 769px) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.columns {
+  span {
+    color: var(--gray40, #9fa6b2);
+    font-size: 1.6rem;
+  }
+}
+
+.invitor {
+  margin-left: 154px;
+  margin-right: 70px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 75px;
+
+  span {
+    color: var(--gray40, #9fa6b2);
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  @media (min-width: 375px) {
+    margin-top: 105px;
+  }
+
+  @media (min-width: 769px) {
+    margin-top: 67px;
+
+    span {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.emptyMessage {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  margin-bottom: 8px;
+
+  @media (min-width: 769px) {
+    width: 100px;
+    height: 100px;
+  }
+}

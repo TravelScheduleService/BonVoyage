@@ -9,8 +9,11 @@ export default function SideBar() {
   return (
     <div className={styles['sidebar']}>
       <div className={styles['logoArea']}>
-        <Image src={logo}></Image>
-        <Image className={styles['logoText']} src={taskify}></Image>
+        <img className={styles['logo']} src={'/assets/icon/logo.svg'}></img>
+        <img
+          className={styles['logoText']}
+          src={'/assets/icon/taskify.svg'}
+        ></img>
       </div>
       <div className={styles['menuArea']}>
         <div className={styles['menuTitleArea']}>

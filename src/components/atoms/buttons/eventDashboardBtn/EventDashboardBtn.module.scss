@@ -30,7 +30,7 @@
 
 //새로운 대시보드
 .newDashboard {
-  width: 260px;
+  width: 247px;
   height: 58px;
   border-radius: 8px;
   border: 1px solid var(--gray30, #d9d9d9);
@@ -47,7 +47,7 @@
 
   //태블릿
   @media (min-width: 769px) {
-    width: 247px;
+    width: 260px;
     height: 68px;
   }
 
@@ -66,7 +66,6 @@
   border: 1px solid var(--gray30, #d9d9d9);
   background: var(--white, #ffffff);
   cursor: pointer;
-
 
   //태블릿
   @media (min-width: 769px) {
@@ -93,11 +92,9 @@
   color: var(--black20, #333236);
   cursor: pointer;
 
-
   //데스크탑 태블릿
   @media (min-width: 769px) {
     width: 320px;
     height: 62px;
   }
 }
-

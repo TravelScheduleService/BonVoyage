@@ -1,0 +1,45 @@
+.baseBtn {
+  border-radius: 8px;
+  border: 1px solid var(--gray30, #d9d9d9);
+  background: var(--white, #ffffff);
+  color: var(--Gray50, #787468);
+  font-size: 1.4rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  img {
+    display: none;
+  }
+}
+
+.edit {
+  @extend .baseBtn;
+  width: 50px;
+  height: 30px;
+
+  //태블릿 데스크탑
+  @media (min-width: 769px) {
+    width: 88px;
+    height: 40px;
+    .editImg {
+      display: block;
+    }
+  }
+}
+
+.invite {
+  @extend .baseBtn;
+  width: 73px;
+  height: 30px;
+
+  //태블릿 데스크탑
+  @media (min-width: 769px) {
+    width: 116px;
+    height: 40px;
+    .addBoxImg {
+      display: block;
+    }
+  }
+}

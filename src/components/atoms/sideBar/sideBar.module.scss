@@ -1,19 +1,35 @@
 .sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 67px;
-  height: 100vh;
+  align-items: center;
+  border-right: solid 1px var(--gray20, #eee);
+   min-height: 100vh;
+  height: 100%;
+  background-color: #333;
   padding: 20px 24px;
   border-right: solid 1px var(--gray20, #eee);
   position: fixed;
-  z-index: 2;
+  z-index: 1;
   background-color: var(--white);
-}
 
+}
+.logoArea {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  margin-left: 6px;
+
+}
 .logoText {
   display: none;
 }
 
 .menuArea {
-  margin-top: 40px;
+  margin-top: 20px;
+  padding: 10px;
 }
 
 .menuTitleArea {
@@ -25,6 +41,9 @@
   font-size: 1.2rem;
   color: var(--gray50);
   display: none;
+}
+.ellipseGreen {
+  display: block;
 }
 
 .sidebar a {
@@ -38,23 +57,36 @@
   text-decoration: underline;
 }
 
-@media (min-width: 375px) {
+@media (min-width: 376px) {
   .sidebar {
     width: 160px;
+    padding: 20px 24px;
+  }
+  .logoText {
+    display: block;
+
   }
   .menuTitle {
     display: block;
   }
   .menuArea {
-    margin-top: 60px;
+    margin-top: 20px;
   }
 }
 
 @media (min-width: 769px) {
   .sidebar {
-    width: 300px;
+    width: 160px;
+    padding: 20px 24px;
+
   }
   .menuArea {
-    margin-top: 60px;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    width: 300px;
   }
 }
