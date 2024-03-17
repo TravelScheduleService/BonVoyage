@@ -6,8 +6,6 @@ import { useState } from 'react';
 
 const cn = classNames.bind(styles);
 
-const cn = classNames.bind(styles);
-
 interface Props {
   profileImageUrl: string;
   nickname: string;

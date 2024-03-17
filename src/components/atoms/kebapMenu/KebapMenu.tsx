@@ -1,4 +1,4 @@
-import EditCardModal from '@/components/molecules/modals/editCardModal /EditCardModal';
+import EditCardModal from '@/components/molecules/modals/editCardModal/EditCardModal';
 import { useState } from 'react';
 import styles from './kebapMenu.module.scss';
 
