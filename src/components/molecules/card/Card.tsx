@@ -1,48 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './card.module.scss';
 import Image from 'next/image';
-import testImage from '../../../../public/assets/image/testImage.png';
-import testProfile from '../../../../public/assets/image/testProfile.png';
 import calendarIcon from '../../../../public/assets/icon/calendarIcon.svg';
 import ChipTagWithoutX from '@/components/atoms/chipTag/ChipTagWithoutX';
+import instance from '@/api/axios';
 
-interface CardProps {
+interface Card {
+  id: number;
   title: string;
-  date: string;
-  userProfile: string;
+  imageUrl: string;
+  tags: string[];
+  createdAt: string;
+  assignee: {
+    profileImageUrl: string;
+  };
+}
+interface CardProps {
   onClick: () => void;
+  columnId: number;
 }
 
-export default function Card({ title, date, userProfile, onClick }: CardProps) {
-  return (
-    <div className={styles['card']} onClick={onClick}>
-      <img
-        className={styles['cardImage']}
-        src="assets/image/testImage.png"
-      ></img>
-      <div className={styles['infoArea']}>
-        <span className={styles['cardTitle']}>{title}</span>
-        <div className={styles['tagDateArea']}>
-          <div className={styles['tagArea']}>
-            <ChipTagWithoutX tag="일반" color="pink" />
-          </div>
+export default function Card({ onClick, columnId }: CardProps) {
+  const [cards, setCards] = useState<Card[]>([]);
 
-          <div className={styles['dateProfileArea']}>
-            <div className={styles['dateArea']}>
-              <Image
-                className={styles['calendarIcon']}
-                src={calendarIcon}
-              ></Image>
-              <span className={styles['date']}>{date}</span>
+  async function getCards() {
+    try {
+      const res = await instance.get<{ cards: Card[] }>(
+        `/cards?size=10&columnId=${columnId}`,
+        {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        },
+      );
+      const nextCards = res.data.cards;
+      setCards(nextCards);
+    } catch (error) {
+      console.error('Error fetching cards:', error);
+    }
+  }
+  useEffect(() => {
+    getCards();
+  }, [columnId]);
+  console.log(cards);
+
+  return (
+    <div>
+      {cards?.map((card) => (
+        <div key={card.id} className={styles['card']} onClick={onClick}>
+          <img className={styles['cardImage']} src={card.imageUrl}></img>
+          <div className={styles['infoArea']}>
+            <span className={styles['cardTitle']}>{card.title}</span>
+            <div className={styles['tagDateArea']}>
+              <div className={styles['tagArea']}>
+                <ChipTagWithoutX tag={card.tags.join(', ')} color="pink" />
+              </div>
+
+              <div className={styles['dateProfileArea']}>
+                <div className={styles['dateArea']}>
+                  <Image
+                    className={styles['calendarIcon']}
+                    src={calendarIcon}
+                  ></Image>
+                  <span className={styles['date']}>{card.createdAt}</span>
+                </div>
+                <Image
+                  className={styles['userProfile']}
+                  src={card.assignee.profileImageUrl}
+                  alt="userProfile"
+                ></Image>
+              </div>
             </div>
-            <Image
-              className={styles['userProfile']}
-              src={testProfile}
-              alt="userProfile"
-            ></Image>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }
