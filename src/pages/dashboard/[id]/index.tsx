@@ -55,7 +55,10 @@ export default function Dashboard() {
         </div>
       </section>
       {isModalOpen && (
-        <CreateColumnModal onClose={closeModal}></CreateColumnModal>
+        <CreateColumnModal
+          onClose={closeModal}
+          dashboardId={Number(id)}
+        ></CreateColumnModal>
       )}
     </div>
   );

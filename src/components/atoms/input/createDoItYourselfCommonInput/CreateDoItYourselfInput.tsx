@@ -8,6 +8,8 @@ const cn = classNames.bind(styles);
 
 export default function CreateDoItYourselfInput({
   title,
+  value,
+  onChange,
   content,
   icon,
   children,
@@ -34,6 +36,8 @@ export default function CreateDoItYourselfInput({
       {!isSpecialInput ? (
         <input
           type={type}
+          value={value}
+          onChange={onChange}
           placeholder={content}
           {...inputProps}
           className={styles.inputContainer}
@@ -47,6 +51,8 @@ export default function CreateDoItYourselfInput({
           {icon && <div className={styles.calendarIcon}>{icon}</div>}
           <input
             type={type}
+            value={value}
+            onChange={onChange}
             placeholder={content}
             {...inputProps}
             className={styles.specialInputContainer}
