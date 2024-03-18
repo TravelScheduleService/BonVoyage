@@ -35,14 +35,11 @@ export default function EditColumnModal({
 
   const handleEditClick = async () => {
     try {
-      // 수정된 컬럼 이름을 서버에 보냅니다.
       await instance.put(`/columns/${columnId}`, { title: editedColumnName });
-      // 성공적으로 서버에 보냈을 경우 모달을 닫습니다.
       getColumns();
       onClose();
     } catch (error) {
       console.error('Error updating column:', error);
-      // 실패한 경우에 대한 처리를 여기에 추가할 수 있습니다.
     }
   };
 
