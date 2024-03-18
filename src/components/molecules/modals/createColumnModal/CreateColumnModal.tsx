@@ -36,6 +36,7 @@ export default function CreateColumnModal({
       });
       console.log('Column added successfully:', res.data);
       onClose();
+      window.location.reload();
     } catch (error) {
       console.error('Error adding column:', error);
     }

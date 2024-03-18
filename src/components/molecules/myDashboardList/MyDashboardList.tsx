@@ -44,7 +44,7 @@ export default function MyDashboardList({
   const onClickCreateDashboard = async (createDashboard: CreateDashboard) => {
     const response = await postNewDashboard(createDashboard);
 
-    router.push(`/dashboard/${response.data.id}`);
+    router.push(`/dashboard/${response.id}`);
   };
 
   return (
