@@ -6,14 +6,21 @@ import DeleteColumnModal from '../deleteColumnModal/DeleteColumnModal';
 
 interface ModalProps {
   onClose: () => void;
+  columnName: string;
 }
 
-export default function EditColumnModal({ onClose }: ModalProps) {
+export default function EditColumnModal({ onClose, columnName }: ModalProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editedColumnName, setEditedColumnName] = useState(columnName);
 
   const handleDeleteClick = () => {
     setIsModalOpen(true);
   };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEditedColumnName(event.target.value);
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -22,7 +29,10 @@ export default function EditColumnModal({ onClose }: ModalProps) {
     <div className={styles['cardDetailModal']}>
       <div className={styles['modalContent']}>
         <h1 className={styles['modalTitle']}>컬럼 관리</h1>
-        <ColumnNameInput></ColumnNameInput>
+        <ColumnNameInput
+          value={editedColumnName}
+          onChange={handleInputChange}
+        ></ColumnNameInput>
         <span className={styles['deleteButton']} onClick={handleDeleteClick}>
           삭제하기
         </span>

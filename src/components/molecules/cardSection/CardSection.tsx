@@ -25,6 +25,7 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
   const [isCreateCardModalOpen, setIsCreateCardModalOpen] = useState(false);
   const [isEditColumnModalOpen, setIsEditColumnModalOpen] = useState(false);
   const [columns, setColumns] = useState<Column[]>([]);
+  const [selectedColumn, setSelectedColumn] = useState<Column | null>(null);
 
   async function getColumns() {
     try {
@@ -51,11 +52,13 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
     setIsCreateCardModalOpen(true);
   };
 
-  const handleSettingButtonClick = () => {
+  const handleSettingButtonClick = (column: Column) => {
+    setSelectedColumn(column);
     setIsEditColumnModalOpen(true);
   };
 
   const closeModal = () => {
+    setSelectedColumn(null);
     setIsDetailModalOpen(false);
     setIsCreateCardModalOpen(false);
     setIsEditColumnModalOpen(false);
@@ -76,7 +79,7 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
               <ChipNumber number="3"></ChipNumber>
             </div>
             <Image
-              onClick={handleSettingButtonClick}
+              onClick={() => handleSettingButtonClick(column)}
               className={styles['settingIcon']}
               src={settingIcon}
             ></Image>
@@ -94,8 +97,11 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
       {isCreateCardModalOpen && (
         <CreateCardModal onClose={closeModal}></CreateCardModal>
       )}
-      {isEditColumnModalOpen && (
-        <EditColumnModal onClose={closeModal}></EditColumnModal>
+      {isEditColumnModalOpen && selectedColumn && (
+        <EditColumnModal
+          onClose={closeModal}
+          columnName={selectedColumn.title}
+        ></EditColumnModal>
       )}
     </div>
   );
