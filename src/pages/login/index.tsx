@@ -1,13 +1,17 @@
+import { AuthResponse, User } from '@/@types/type';
+import { login } from '@/api/auth/authApi';
 import Button from '@/components/atoms/buttons/button';
 import EmailInput from '@/components/atoms/input/emailInput/EmailInput';
 import PasswordInput from '@/components/atoms/input/passwordInput/PasswordInput';
+import useSessionStorage from '@/hooks/useSessionStorage';
+import { AxiosError } from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './login.module.scss';
 
-interface SignInProps {
+interface SignInProps extends AuthRequest {
   email: string;
   nickname: string;
   password: string;
@@ -33,26 +37,42 @@ const DesktopLogo = () => (
     alt="Desktop Logo"
   />
 );
-export default function SignIn() {
+export default function Login() {
+  const [accessToken, setAccessToken] = useSessionStorage('accessToken');
+  const [user, setUser] = useSessionStorage<User | {}>('user', {});
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const form = useForm<SignInProps>({ mode: 'all' });
   const {
     handleSubmit,
     register,
+    setError,
+    clearErrors,
     formState: { errors, isValid },
   } = form;
 
-  const onSubmit: SubmitHandler<SignInProps> = (data: any) => {
-    // Handle form submission
+  const onSubmit: SubmitHandler<SignInProps> = async (payload: AuthRequest) => {
+    clearErrors('root');
+    try {
+      const { accessToken, user } = await login(payload);
+      setAccessToken(accessToken);
+      setUser(user);
+      router.push('/mydashboard');
+    } catch (error) {
+      const axiosError = error as AxiosError<AuthResponse>;
+      setError(
+        'root',
+        axiosError.response?.data || { message: '로그인에 실패했습니다.' },
+      );
+    }
   };
 
   const handleSignUpLinkClick = () => {
     router.push('/signUp');
   };
 
-  const handleLoginBtnClick = () => {
-    router.push('/mydashboard');
+  const handleLogoClick = () => {
+    router.push('/');
   };
 
   useEffect(() => {
@@ -75,7 +95,7 @@ export default function SignIn() {
   return (
     <div className={styles.loginWrapper}>
       <div className={styles.loginLogoContainer}>
-        <div className={styles.loginLogo}>
+        <div className={styles.loginLogo} onClick={handleLogoClick}>
           {isMobile ? <MobileLogo /> : <DesktopLogo />}
         </div>
         <span className={styles.loginNiceMeetYouText}>
@@ -88,12 +108,10 @@ export default function SignIn() {
       >
         <EmailInput errors={errors} register={register} />
         <PasswordInput errors={errors} register={register} />
-        <Button
-          name="로그인"
-          type="account"
-          disabled={!isValid}
-          onClick={handleLoginBtnClick}
-        />
+        <Button name="로그인" type="account" disabled={!isValid} />
+        {errors.root && (
+          <div className={styles.errorMessage}>{errors.root.message}</div>
+        )}
       </form>
       <div className={styles.signUpLinkBox}>
         회원이 아니신가요?

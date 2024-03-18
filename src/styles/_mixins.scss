@@ -3,6 +3,10 @@
   background-position: right;
   background-attachment: fixed;
   animation: moveBackground 50s linear infinite;
+
+  @media (orientation: landscape) {
+    background-size: 110% auto;
+  }
 }
 
 @keyframes moveBackground {

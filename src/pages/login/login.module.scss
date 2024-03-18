@@ -33,6 +33,40 @@
   }
 }
 
+.loginLogo {
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    animation-name: bob-float, bob;
+    animation-duration: 0.3s, 1.5s;
+    animation-delay: 0s, 0.3s;
+    animation-timing-function: ease-out, ease-in-out;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: forwards;
+    animation-direction: normal, alternate;
+  }
+}
+
+@keyframes bob {
+  0% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes bob-float {
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
 .loginNiceMeetYouText {
   color: var(--black);
   font-size: 1.2rem;
@@ -81,5 +115,15 @@
     text-decoration: underline;
     font-weight: 500;
     cursor: pointer;
+  }
+}
+
+.errorMessage {
+  color: red;
+  font-size: 1.2rem;
+  margin: 2px 0;
+
+  @media (min-width: 769px) {
+    font-size: 1.4rem;
   }
 }

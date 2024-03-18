@@ -1,5 +1,5 @@
 import axios from '@/api/axios';
-import { ChangePasswordProps, UserChangeNicknameProps } from '@/@types/type';
+import { UserChangePasswordProps, UserChangeAccountProps } from '@/@types/type';
 
 export const userInfoData = async () => {
   try {
@@ -16,7 +16,7 @@ export const userInfoData = async () => {
 export const userChangePassword = async ({
   password,
   newPassword,
-}: ChangePasswordProps) => {
+}: UserChangePasswordProps) => {
   try {
     const res = await axios.put('/auth/password', {
       password: password,
@@ -31,7 +31,10 @@ export const userChangePassword = async ({
 
 //비밀번호 변경 api
 
-export const userChangeAccount = async ({nickname, profileImageUrl}: UserChangeNicknameProps) => {
+export const userChangeAccount = async ({
+  nickname,
+  profileImageUrl,
+}: UserChangeAccountProps) => {
   try {
     const requestData = {};
     if (nickname) {

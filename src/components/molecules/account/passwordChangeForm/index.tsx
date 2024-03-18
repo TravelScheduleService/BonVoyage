@@ -5,117 +5,118 @@ import { useState } from 'react';
 import { userChangePassword } from '@/api/accountApi/accountApi';
 import { useForm } from 'react-hook-form';
 import BaseModal from '@/components/atoms/baseModal/BaseModal';
+import { passwordFromProps } from '@/@types/type';
 
 const PasswordChangeForm = () => {
-  const { register } = useForm({ mode: 'all' }); // 사용하지는 않지만 register 에러 막기용
+  const {
+    handleSubmit,
+    register,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm<passwordFromProps>({ mode: 'all' }); // 사용하지는 않지만 register 에러 막기용
 
-  const [password, setPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [error, setError] = useState('');
-  const [ismodalOpen, setIsModalOpen] = useState(false);
+  const [modal, setIsModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  const isDisabled =
-    password === '' || newPassword === '' || confirmNewPassword === '';
-
-  const handlePasswordChange = async () => {
-    if (newPassword !== confirmNewPassword) {
-      setError('비밀번호가 일치하지 않습니다.');
-      return;
-    }
-
-    if (newPassword.length < 8) {
-      setError('새로운 비밀번호는 8자 이상 입력해주세요.');
-      return;
-    }
-
+  const onSubmit = async (data: passwordFromProps) => {
     const res: any = await userChangePassword({
-      password: password,
-      newPassword: newPassword,
+      password: data.password,
+      newPassword: data.newPassword,
     });
 
     if (res.status === 204) {
-      setPassword('');
-      setNewPassword('');
-      setConfirmNewPassword('');
-      setError('');
-      setIsModalOpen(true)
-      setModalMessage('비밀번호가 변경되었어요.');
+      setIsModal(true);
+      setModalMessage('비밀번호가 변경되었습니다.');
+      reset();
       return;
     }
-    setIsModalOpen(true);
-    setModalMessage('현재 비밀번호를 확인해주세요.');
+    setIsModal(true);
+    setModalMessage('현재 비밀번호를 확인해주세요');
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsModal(false);
   };
+
+  const watchFields = watch(['password', 'newPassword', 'newPasswordConfirm'], {
+    password: '',
+    newPassword: '',
+    newPasswordConfirm: '',
+  });
 
   return (
     <div className={styles.container}>
       <h1>비밀번호 변경</h1>
-      <div className={styles.inputContainer}>
+      <form className={styles.inputContainer} onSubmit={handleSubmit(onSubmit)}>
         <CommonInput
           label="현재 비밀번호"
           placeholder="현재 비밀번호 입력"
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           errors={{}}
-          register={register}
           name="password"
+          register={register}
         />
         <CommonInput
           label="새 비밀번호"
           placeholder="새 비밀번호 입력"
           type="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          errors={{}}
-          register={register}
+          errors={errors}
           name="newPassword"
+          register={register}
+          registerOptions={{
+            minLength: {
+              value: 8,
+              message: '8자 이상 입력해주세요.',
+            },
+          }}
         />
         <CommonInput
           label="새 비밀번호 확인"
           placeholder="새 비밀번호 입력"
           type="password"
-          value={confirmNewPassword}
-          onChange={(e) => setConfirmNewPassword(e.target.value)}
-          errors={{}}
+          errors={errors}
+          name="newPasswordConfirm"
           register={register}
-          name="confirmNewPassword"
+          registerOptions={{
+            validate: {
+              matchesConfirmation: (value, { newPassword }) =>
+                value === newPassword || '비밀번호가 일치하지 않습니다.',
+            },
+          }}
         />
-      </div>
-      <div className={styles.error_text_wrapper}>
-        {error && <p className={styles.error_text}>{error}</p>}
-      </div>
-      <div className={styles.ButtonContainer}>
-        <Button
-          name="변경"
-          type="modal"
-          color="blue"
-          onClick={handlePasswordChange}
-          disabled={isDisabled}
-        />
-        {ismodalOpen && (
-          <BaseModal closeModal={closeModal}>
-            <div className={styles.modalContainer}>
-              <p>{modalMessage}</p>
-              <div className={styles.modalBtn}>
-                <Button
-                  name="확인"
-                  type="modal"
-                  color="blue"
-                  onClick={closeModal}
-                />
+        <div className={styles.ButtonContainer}>
+          <Button
+            name="변경"
+            type="modal"
+            color="blue"
+            onClick={handleSubmit(onSubmit)}
+            disabled={!watchFields.every((field) => field)}
+          />
+          {modal && (
+            <BaseModal closeModal={closeModal}>
+              <div className={styles.modalContainer}>
+                <p>{modalMessage}</p>
+                <div className={styles.modalBtn}>
+                  <Button
+                    name="확인"
+                    type="modal"
+                    color="blue"
+                    onClick={closeModal}
+                  />
+                </div>
               </div>
-            </div>
-          </BaseModal>
-        )}
-      </div>
+            </BaseModal>
+          )}
+        </div>
+      </form>
     </div>
   );
 };
 export default PasswordChangeForm;
 
+// const [modal, setIsModal] = useState({
+//   isModalOpen: false,
+//   modalMessage: '',
+// });
+//모달 객체로 만들어서 하면 깔끔할듯

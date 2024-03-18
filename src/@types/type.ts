@@ -1,7 +1,6 @@
 import { StaticImageData } from 'next/image';
 import { HTMLInputTypeAttribute, ReactNode } from 'react';
 
-//타입 들어갈곳
 export interface ButtonProps {
   name?: string;
   disabled?: boolean;
@@ -87,13 +86,23 @@ export interface Invitation {
   updatedAt: string;
 }
 
-export interface ChangePasswordProps {
+export interface UserChangePasswordProps {
   password: string;
   newPassword: string;
 }
 
-export interface UserChangeNicknameProps{
-  nickname: string ;
+export interface UserChangeAccountProps {
+  nickname: string;
   profileImageUrl: string;
 }
 
+export interface passwordFromProps {
+  password: string;
+  newPassword: string;
+  newPasswordConfirm: string;
+}
+
+export interface AuthResponse extends ErrorResponse {
+  user: User;
+  accessToken: string;
+}

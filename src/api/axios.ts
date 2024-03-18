@@ -10,19 +10,19 @@ const instance = axios.create({
   },
 });
 
+const window = global.window;
+
 instance.interceptors.request.use(
   (config) => {
     // confing는 axios의 설정을 담고있는 객체
-    // const token = localStorage.getItem('token');
-    const token = sessionStorage.getItem('token');
-
+    const token = window?.sessionStorage.getItem('accessToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
-    console.log(error);
+    if (window) console.log(error);
     return Promise.reject(error);
   },
 );
@@ -32,7 +32,7 @@ instance.interceptors.response.use(
     return config;
   },
   (error) => {
-    console.log(error);
+    if (window) console.log(error);
     return Promise.reject(error);
   },
 );

@@ -1,15 +1,16 @@
+import { signUp } from '@/api/auth/authApi';
+import Button from '@/components/atoms/buttons/button';
 import EmailInput from '@/components/atoms/input/emailInput/EmailInput';
 import NicknameInput from '@/components/atoms/input/nicknameInput/NicknameInput';
+import PasswordConfirmInput from '@/components/atoms/input/passwordConfirmInput/passwordConfirmInput';
 import PasswordInput from '@/components/atoms/input/passwordInput/PasswordInput';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './signUp.module.scss';
-import Button from '@/components/atoms/buttons/button';
-import { useRouter } from 'next/router';
-import PasswordConfirmInput from '@/components/atoms/input/passwordConfirmInput/passwordConfirmInput';
 
-interface SignUpProps {
+interface SignUpProps extends AuthRequest {
   email: string;
   nickname: string;
   password: string;
@@ -47,36 +48,37 @@ export default function SignUp() {
   } = form;
   console.log({ errors, isValid });
 
-  const onSubmit: SubmitHandler<SignUpProps> = (data: any) => {
-    // Handle form submission
+  const onSubmit: SubmitHandler<SignUpProps> = async (data: AuthRequest) => {
+    try {
+      await signUp(data);
+      alert('가입이 완료되었습니다.');
+      router.push('/login');
+    } catch (error) {
+      throw error;
+    }
   };
 
-  const handleSignUpBtnClick = () => {
-    alert('가입이 완료되었습니다.');
-    router.push('/login');
+  const handleMediaQueryChange = (e: MediaQueryListEvent | MediaQueryList) => {
+    setIsMobile(e.matches);
   };
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
-    const handleMediaQueryChange = (
-      e: MediaQueryListEvent | MediaQueryList,
-    ) => {
-      setIsMobile(e.matches);
-    };
-
     handleMediaQueryChange(mediaQuery);
-
     mediaQuery.addEventListener('change', handleMediaQueryChange);
-
     return () => {
       mediaQuery.removeEventListener('change', handleMediaQueryChange);
     };
   }, []);
 
+  const handleLogoClick = () => {
+    router.push('/');
+  };
+
   return (
     <div className={styles.signUpWrapper}>
       <div className={styles.signUpLogoContainer}>
-        <div className={styles.signUpLogo}>
+        <div className={styles.signUpLogo} onClick={handleLogoClick}>
           {isMobile ? <MobileLogo /> : <DesktopLogo />}
         </div>
         <span className={styles.signUpNiceMeetYouText}>
@@ -104,12 +106,7 @@ export default function SignUp() {
         <div className={styles.signUpError}>
           {errors.terms && '약관에 동의해주세요.'}
         </div>
-        <Button
-          name="가입하기"
-          type="account"
-          disabled={!isValid}
-          onClick={handleSignUpBtnClick}
-        />
+        <Button name="가입하기" type="account" disabled={!isValid} />
       </form>
     </div>
   );

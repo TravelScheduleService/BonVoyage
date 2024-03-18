@@ -2,7 +2,6 @@ import CommonInput, { CommonInputProps } from '../common/CommonInput';
 
 function validateEmail(email: string): boolean {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  console.log({ email, regex, test: regex.test(email) });
   return regex.test(email);
 }
 
