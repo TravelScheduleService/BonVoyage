@@ -3,13 +3,21 @@ import styles from './editColumnModal.module.scss';
 import Button from '@/components/atoms/buttons/button';
 import ColumnNameInput from '@/components/atoms/input/columnNameInput/ColumnNameInput';
 import DeleteColumnModal from '../deleteColumnModal/DeleteColumnModal';
+import instance from '@/api/axios';
 
 interface ModalProps {
   onClose: () => void;
+  getColumns: () => void;
   columnName: string;
+  columnId: number;
 }
 
-export default function EditColumnModal({ onClose, columnName }: ModalProps) {
+export default function EditColumnModal({
+  onClose,
+  getColumns,
+  columnName,
+  columnId,
+}: ModalProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editedColumnName, setEditedColumnName] = useState(columnName);
 
@@ -23,6 +31,19 @@ export default function EditColumnModal({ onClose, columnName }: ModalProps) {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleEditClick = async () => {
+    try {
+      // 수정된 컬럼 이름을 서버에 보냅니다.
+      await instance.put(`/columns/${columnId}`, { title: editedColumnName });
+      // 성공적으로 서버에 보냈을 경우 모달을 닫습니다.
+      getColumns();
+      onClose();
+    } catch (error) {
+      console.error('Error updating column:', error);
+      // 실패한 경우에 대한 처리를 여기에 추가할 수 있습니다.
+    }
   };
 
   return (
@@ -44,7 +65,12 @@ export default function EditColumnModal({ onClose, columnName }: ModalProps) {
             color="white"
             onClick={onClose}
           ></Button>
-          <Button name="변경" type="modal" color="blue" />
+          <Button
+            name="변경"
+            type="modal"
+            color="blue"
+            onClick={handleEditClick}
+          />
         </div>
       </div>
       {isModalOpen && (

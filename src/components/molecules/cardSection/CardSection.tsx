@@ -100,7 +100,9 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
       {isEditColumnModalOpen && selectedColumn && (
         <EditColumnModal
           onClose={closeModal}
+          getColumns={getColumns}
           columnName={selectedColumn.title}
+          columnId={selectedColumn.id}
         ></EditColumnModal>
       )}
     </div>
