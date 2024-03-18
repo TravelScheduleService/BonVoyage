@@ -26,16 +26,6 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
   const [isEditColumnModalOpen, setIsEditColumnModalOpen] = useState(false);
   const [columns, setColumns] = useState<Column[]>([]);
 
-  // async function getColumns() {
-  //   const res = await instance.get(`/columns?dashboardId=${dashboardId}`, {
-  //     headers: {
-  //       Accept: 'application/json',
-  //       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-  //     },
-  //   });
-  //   const nextColumns = res.data;
-  //   setColumns(nextColumns);
-  // }
   async function getColumns() {
     try {
       const res = await instance.get<{ data: Column[] }>(

@@ -15,18 +15,10 @@
   display: none;
 }
 
-// .ellipseGreen {
-//   display: block;
-// }
-
-// .logoText {
-//   display: none;
-// }
-//height: 100% 이거 없애도 될 것 같아요
-
 .menuTitleArea {
   display: flex;
   justify-content: space-between;
+  margin-top: 40px;
 }
 
 .menuTitle {
@@ -35,22 +27,7 @@
   display: none;
 }
 
-.ellipseGreen {
-  display: block;
-}
-
-.sidebar a {
-  display: block;
-  color: #fff;
-  text-decoration: none;
-  margin-bottom: 10px;
-}
-
-.sidebar a:hover {
-  text-decoration: underline;
-}
-
-@media (min-width: 376px) {
+@media (min-width: 769px) {
   .sidebar {
     width: 160px;
     padding: 20px 24px;
@@ -70,7 +47,7 @@
 
   @media (min-width: 1024px) {
     .sidebar {
-      width: 160px;
+      width: 300px;
       padding: 20px 24px;
     }
 
@@ -82,7 +59,6 @@
     .menuTitle {
       font-size: 1.2rem;
       color: var(--gray50, #787486);
-      display: none;
     }
 
     .sidebar a {
@@ -97,32 +73,32 @@
     }
   }
   // 태블릿일때 사이드바 전체크기
-  @media (min-width: 769px) {
-    .sidebar {
-      width: 160px;
-    }
+  //   @media (min-width: 769px) {
+  //     .sidebar {
+  //       width: 160px;
+  //     }
 
-    .menuTitle {
-      display: block;
-    }
-  }
-
-  // 위와 아래 중 어떤 게 맞는거죠..?
-
-  // @media (min-width: 1024px) {
-  //   .sidebar {
-  //     width: 300px;
+  //     .menuTitle {
+  //       display: block;
+  //     }
   //   }
-  // }
-  // 데스크탑일때 사이드바 전체크기
-  @media (min-width: 1024px) {
-    .sidebar {
-      width: 300px;
-      padding: 20px 24px;
-    }
 
-    .menuTitle {
-      display: block;
-    }
-  }
+  //   // 위와 아래 중 어떤 게 맞는거죠..?
+
+  //   // @media (min-width: 1024px) {
+  //   //   .sidebar {
+  //   //     width: 300px;
+  //   //   }
+  //   // }
+  //   // 데스크탑일때 사이드바 전체크기
+  //   @media (min-width: 1024px) {
+  //     .sidebar {
+  //       width: 300px;
+  //       padding: 20px 24px;
+  //     }
+
+  //     .menuTitle {
+  //       display: block;
+  //     }
+  //   }
 }

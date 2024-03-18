@@ -6,14 +6,16 @@ const instance = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    "Access-Control-Allow-Origin": "*", 
+    'Access-Control-Allow-Origin': '*',
   },
 });
 
 instance.interceptors.request.use(
   (config) => {
     // confing는 axios의 설정을 담고있는 객체
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

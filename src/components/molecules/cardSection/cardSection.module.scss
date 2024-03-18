@@ -2,15 +2,11 @@
   display: flex;
   flex-direction: column;
   border-bottom: solid 1px var(--gray30, #eee);
-
-  padding: 16px 12px;
   background: var(--gray10, #fafafa);
 
   @media (min-width: 769px) {
-    // border-right: solid 1px var(--gray30, #eee);
     border-bottom: none;
     height: 100vh;
-    // width: 350px;
   }
   @media (min-width: 1024px) {
     display: flex;
@@ -19,6 +15,9 @@
 }
 
 .column {
+  border-bottom: solid 1px var(--gray30, #eee);
+  padding: 12px;
+
   @media (min-width: 1024px) {
     width: 345px;
     border-right: 1px solid var(--gray30);
