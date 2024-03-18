@@ -1,12 +1,29 @@
 import React, { useState } from 'react';
 import styles from './deleteColumnModal.module.scss';
 import Button from '@/components/atoms/buttons/button';
+import instance from '@/api/axios';
 
 interface ModalProps {
   onClose: () => void;
+  getColumns: () => void;
+  columnId: number;
 }
 
-export default function DeleteColumnModal({ onClose }: ModalProps) {
+export default function DeleteColumnModal({
+  onClose,
+  getColumns,
+  columnId,
+}: ModalProps) {
+  const handleDeleteColumn = async () => {
+    try {
+      await instance.delete(`/columns/${columnId}`);
+      getColumns();
+      onClose();
+    } catch (error) {
+      console.error('Error deleting column:', error);
+    }
+  };
+
   return (
     <div className={styles['cardDetailModal']}>
       <div className={styles['modalContent']}>
@@ -19,7 +36,12 @@ export default function DeleteColumnModal({ onClose }: ModalProps) {
             color="white"
             onClick={onClose}
           ></Button>
-          <Button name="삭제" type="modal" color="blue" />
+          <Button
+            name="삭제"
+            type="modal"
+            color="blue"
+            onClick={handleDeleteColumn}
+          />
         </div>
       </div>
     </div>

@@ -71,7 +71,11 @@ export default function EditColumnModal({
         </div>
       </div>
       {isModalOpen && (
-        <DeleteColumnModal onClose={closeModal}></DeleteColumnModal>
+        <DeleteColumnModal
+          onClose={closeModal}
+          getColumns={getColumns}
+          columnId={columnId}
+        ></DeleteColumnModal>
       )}
     </div>
   );
