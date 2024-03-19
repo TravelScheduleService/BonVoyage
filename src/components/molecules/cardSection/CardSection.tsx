@@ -10,11 +10,7 @@ import CardDetailModal from '../modals/cardDetailModal/CardDetailModal';
 import CreateCardModal from '../modals/createCardModal/CreateCardModal';
 import EditColumnModal from '../modals/editColumnModal/EditColumnModal';
 import instance from '@/api/axios';
-
-interface Column {
-  id: number;
-  title: string;
-}
+import { Column } from '@/@types/type';
 
 interface CardSectionProps {
   dashboardId: number;
@@ -48,7 +44,8 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
     setIsDetailModalOpen(true);
   };
 
-  const handleAddCardButtonClick = () => {
+  const handleAddCardButtonClick = (column: Column) => {
+    setSelectedColumn(column);
     setIsCreateCardModalOpen(true);
   };
 
@@ -82,20 +79,19 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
               onClick={() => handleSettingButtonClick(column)}
               className={styles['settingIcon']}
               src={settingIcon}
-            ></Image>
+              alt="Setting Icon"
+            />
           </div>
           <EventDashboardBtn
             type="addTodo"
-            onClick={handleAddCardButtonClick}
+            onClick={() => handleAddCardButtonClick(column)}
           />
-          <Card columnId={column.id} onClick={handleCardClick}></Card>
+          <Card columnId={column.id} onClick={handleCardClick} />
         </div>
       ))}
-      {isDetailModalOpen && (
-        <CardDetailModal onClose={closeModal}></CardDetailModal>
-      )}
+      {isDetailModalOpen && <CardDetailModal onClose={closeModal} />}
       {isCreateCardModalOpen && (
-        <CreateCardModal onClose={closeModal}></CreateCardModal>
+        <CreateCardModal column={selectedColumn!} onClose={closeModal} />
       )}
       {isEditColumnModalOpen && selectedColumn && (
         <EditColumnModal
@@ -103,7 +99,7 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
           getColumns={getColumns}
           columnName={selectedColumn.title}
           columnId={selectedColumn.id}
-        ></EditColumnModal>
+        />
       )}
     </div>
   );

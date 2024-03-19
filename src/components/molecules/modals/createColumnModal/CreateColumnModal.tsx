@@ -46,10 +46,7 @@ export default function CreateColumnModal({
     <div className={styles['cardDetailModal']}>
       <div className={styles['modalContent']}>
         <h1 className={styles['modalTitle']}>새 컬럼 생성</h1>
-        <ColumnNameInput
-          value={columnName}
-          onChange={handleInputChange}
-        ></ColumnNameInput>
+        <ColumnNameInput value={columnName} onChange={handleInputChange} />
 
         <div className={styles['buttonArea']}>
           <Button

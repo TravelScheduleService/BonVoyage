@@ -1,7 +1,11 @@
 import ChipTag from '@/components/atoms/chipTag/ChipTag';
 import CreateDoItYourselfInput from '@/components/atoms/input/createDoItYourselfCommonInput/CreateDoItYourselfInput';
-import { useState } from 'react';
+import { Dispatch, useCallback, useState } from 'react';
 import styles from './createDoItYourselfTag.module.scss';
+
+interface Props {
+  onChangeTags: Dispatch<string[]>;
+}
 
 const colors: Array<'orange' | 'pink' | 'blue' | 'green'> = [
   'orange',
@@ -10,9 +14,18 @@ const colors: Array<'orange' | 'pink' | 'blue' | 'green'> = [
   'blue',
 ];
 
-export default function CreateDoItYourselfTag() {
-  const [tags, setTags] = useState<string[]>([]); // 입력된 태그들을 저장하는 상태
+export default function CreateDoItYourselfTag({ onChangeTags }: Props) {
+  const [tags, setTagsState] = useState<string[]>([]); // 입력된 태그들을 저장하는 상태
   const [hasTags, setHasTags] = useState<boolean>(false); // 입력된 태그 여부를 저장하는 상태
+
+  const setTags = useCallback(
+    function (action: (prevState: string[]) => string[]) {
+      const newTags = action(tags);
+      setTagsState(newTags);
+      onChangeTags(newTags);
+    },
+    [onChangeTags, tags],
+  );
 
   // 엔터를 누르면 태그를 추가하는 함수
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -42,6 +55,7 @@ export default function CreateDoItYourselfTag() {
       title="태그"
       content="입력 후 Enter를 누르세요"
       type="text"
+      maxLength={10}
       onKeyDown={handleKeyDown}
       isSpecialInput
       isVertical

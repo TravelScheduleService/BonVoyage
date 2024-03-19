@@ -15,6 +15,7 @@ interface Card {
     profileImageUrl: string;
   };
 }
+
 interface CardProps {
   onClick: () => void;
   columnId: number;
@@ -30,7 +31,7 @@ export default function Card({ onClick, columnId }: CardProps) {
         {
           headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
           },
         },
       );
@@ -40,16 +41,25 @@ export default function Card({ onClick, columnId }: CardProps) {
       console.error('Error fetching cards:', error);
     }
   }
+
   useEffect(() => {
-    getCards();
+    if (columnId !== undefined) {
+      // columnId가 undefined가 아닐 때에만 호출
+      getCards();
+    }
   }, [columnId]);
-  console.log(cards);
 
   return (
     <div>
       {cards?.map((card) => (
         <div key={card.id} className={styles['card']} onClick={onClick}>
-          <img className={styles['cardImage']} src={card.imageUrl} />
+          {card.imageUrl && (
+            <Image
+              className={styles['cardImage']}
+              src={card.imageUrl}
+              alt="Card Image"
+            />
+          )}
           <div className={styles['infoArea']}>
             <span className={styles['cardTitle']}>{card.title}</span>
             <div className={styles['tagDateArea']}>
@@ -62,12 +72,13 @@ export default function Card({ onClick, columnId }: CardProps) {
                   <Image
                     className={styles['calendarIcon']}
                     src={calendarIcon}
+                    alt="calendarIcon"
                   />
                   <span className={styles['date']}>{card.createdAt}</span>
                 </div>
                 <Image
                   className={styles['userProfile']}
-                  src={card.assignee.profileImageUrl}
+                  src={card.assignee?.profileImageUrl}
                   alt="userProfile"
                 />
               </div>

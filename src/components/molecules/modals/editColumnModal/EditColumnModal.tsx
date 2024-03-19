@@ -8,7 +8,7 @@ import instance from '@/api/axios';
 interface ModalProps {
   onClose: () => void;
   getColumns: () => void;
-  columnName: string;
+  columnName?: string;
   columnId: number;
 }
 
