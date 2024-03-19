@@ -4,8 +4,6 @@ const instance = axios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/3-1',
   timeout: 5000,
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
 });
