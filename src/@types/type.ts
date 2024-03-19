@@ -15,6 +15,7 @@ export interface CreateDoItYourselfProps {
   title: string;
   content?: string;
   className?: string;
+  value?: string;
   icon?: ReactNode;
   name?: string;
   required?: boolean;
@@ -106,4 +107,22 @@ export interface passwordFromProps {
 export interface AuthResponse extends ErrorResponse {
   user: User;
   accessToken: string;
+}
+
+export interface Card {
+  assigneeUserId: number;
+  dashboardId: number;
+  columnId: number;
+  title: string;
+  description: string;
+  dueDate: string;
+  tags: string[];
+  imageUrl: string;
+}
+
+export interface Member extends MemberProfile {
+  teamId: string;
+  page?: number;
+  size?: number;
+  dashboardId: number;
 }

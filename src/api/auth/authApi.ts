@@ -1,4 +1,4 @@
-import { AuthRequest, AuthResponse, User } from '@/@types/type';
+import { AuthResponse, User } from '@/@types/type';
 import axios from '../axios';
 
 export const login = async (userData: AuthRequest) => {

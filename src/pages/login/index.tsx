@@ -44,6 +44,7 @@ const GoogleIcon = () => (
     width={20}
     height={20}
     alt="Google Icon"
+    className={styles.googleIcon}
   />
 );
 

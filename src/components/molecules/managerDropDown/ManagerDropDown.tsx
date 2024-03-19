@@ -44,7 +44,7 @@ export default function ManagerDropDown({ members }: Props) {
                 width={26}
                 height={26}
                 src={manager.imageUrl}
-                alt='프로필 이미지'
+                alt="프로필 이미지"
               />
               <span>{manager.nickname}</span>
             </div>
@@ -53,8 +53,8 @@ export default function ManagerDropDown({ members }: Props) {
             className={cn('dropDownMenu')}
             width={26}
             height={26}
-            src='/assets/icon/dropDownArrowIcon.svg'
-            alt='아래 삼각형 아이콘'
+            src="/assets/icon/dropDownArrowIcon.svg"
+            alt="아래 삼각형 아이콘"
             onClick={() => setIsOpenMemberList((preStatus) => !preStatus)}
           />
         </div>
@@ -75,6 +75,7 @@ export default function ManagerDropDown({ members }: Props) {
                 return (
                   <div
                     className={cn('itemBox')}
+                    key={element.nickname}
                     onClick={() => onClickItem(element)}
                   >
                     <div className={cn('check')}>
@@ -82,8 +83,8 @@ export default function ManagerDropDown({ members }: Props) {
                         <Image
                           width={22}
                           height={22}
-                          src='/assets/icon/checkIcon.svg'
-                          alt='check 아이콘'
+                          src="/assets/icon/checkIcon.svg"
+                          alt="check 아이콘"
                         />
                       )}
                     </div>
@@ -92,7 +93,7 @@ export default function ManagerDropDown({ members }: Props) {
                         width={26}
                         height={26}
                         src={element.imageUrl}
-                        alt='프로필 이미지'
+                        alt="프로필 이미지"
                       />
                       <span>{element.nickname}</span>
                     </div>

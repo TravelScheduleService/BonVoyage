@@ -49,7 +49,7 @@ export default function Card({ onClick, columnId }: CardProps) {
     <div>
       {cards?.map((card) => (
         <div key={card.id} className={styles['card']} onClick={onClick}>
-          <img className={styles['cardImage']} src={card.imageUrl}></img>
+          <img className={styles['cardImage']} src={card.imageUrl} />
           <div className={styles['infoArea']}>
             <span className={styles['cardTitle']}>{card.title}</span>
             <div className={styles['tagDateArea']}>
@@ -62,14 +62,14 @@ export default function Card({ onClick, columnId }: CardProps) {
                   <Image
                     className={styles['calendarIcon']}
                     src={calendarIcon}
-                  ></Image>
+                  />
                   <span className={styles['date']}>{card.createdAt}</span>
                 </div>
                 <Image
                   className={styles['userProfile']}
                   src={card.assignee.profileImageUrl}
                   alt="userProfile"
-                ></Image>
+                />
               </div>
             </div>
           </div>

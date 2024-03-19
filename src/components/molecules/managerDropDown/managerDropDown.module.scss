@@ -8,8 +8,12 @@
 
 .dropDownName {
   color: var(--black-black_333236, #333236);
-  font-size: 1.8rem;
   font-weight: 500;
+  font-size: 1.4rem;
+
+  @media (min-width: 769px) {
+    font-size: 1.8rem;
+  }
 }
 
 .dropDown {
