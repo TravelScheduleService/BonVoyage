@@ -11,6 +11,7 @@ const Button = ({
   color,
   onClick,
   icon,
+  buttonProps,
 }: ButtonProps) => {
   const classNames = (
     type: ButtonProps['type'],
@@ -44,6 +45,7 @@ const Button = ({
         className={cn(classNames(type, color), 'button')}
         disabled={disabled}
         onClick={onClick}
+        {...buttonProps}
       >
         {icon && <span className={styles.icon}>{icon}</span>}
         <span className={styles.buttonText}>{name}</span>

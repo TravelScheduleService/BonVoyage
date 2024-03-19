@@ -1,5 +1,12 @@
 import { StaticImageData } from 'next/image';
-import { HTMLInputTypeAttribute, ReactNode } from 'react';
+import {
+  ChangeEventHandler,
+  ForwardedRef,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react';
+import { ChangeHandler } from 'react-hook-form';
 
 export interface ButtonProps {
   name?: string;
@@ -8,6 +15,7 @@ export interface ButtonProps {
   color?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   icon?: ReactNode;
+  buttonProps?: InputHTMLAttributes<HTMLButtonElement>;
 }
 
 // 할 일 모달 Input props
@@ -18,10 +26,12 @@ export interface CreateDoItYourselfProps {
   value?: string;
   icon?: ReactNode;
   name?: string;
+  ref?: ForwardedRef<HTMLInputElement>;
   required?: boolean;
   isVertical?: boolean;
   isSpecialInput?: boolean; // 특수한 input이 필요한 경우 사용
   type?: HTMLInputTypeAttribute | 'textarea';
+  onChange?: ChangeEventHandler | ChangeHandler;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -125,4 +135,14 @@ export interface Member extends MemberProfile {
   page?: number;
   size?: number;
   dashboardId: number;
+}
+
+export interface Column {
+  id: number;
+  title?: string;
+  teamId: string;
+  dashboardId: number;
+  createdAt?: string;
+  updatedAt?: string;
+  imageUrl: string;
 }

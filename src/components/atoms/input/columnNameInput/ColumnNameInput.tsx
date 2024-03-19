@@ -1,11 +1,12 @@
+import { ChangeEventHandler } from 'react';
 import CreateDoItYourselfInput from '../createDoItYourselfCommonInput/CreateDoItYourselfInput';
 
 export default function ColumnNameInput({
   value,
   onChange,
 }: {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: ChangeEventHandler;
 }) {
   return (
     <CreateDoItYourselfInput
