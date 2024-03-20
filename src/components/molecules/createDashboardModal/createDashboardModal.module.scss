@@ -57,62 +57,6 @@
   }
 }
 
-.palette {
-  display: flex;
-  gap: 10px;
-}
-
-.checkIcon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 22px;
-  height: 22px;
-
-  @media (min-width: 769px) {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-.paletteColor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  cursor: pointer;
-
-  border-radius: 50%;
-
-  @media (min-width: 769px) {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-.green {
-  background-color: #7ac555;
-}
-
-.orange {
-  background-color: #ffa500;
-}
-
-.pink {
-  background-color: #e876ea;
-}
-
-.purple {
-  background-color: #760dde;
-}
-
-.blue {
-  background-color: #76a5ea;
-}
-
 .modalButtons {
   display: flex;
   justify-content: space-between;

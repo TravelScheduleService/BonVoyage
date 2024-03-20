@@ -7,10 +7,13 @@ export default function HeaderAuth() {
     <>
       <div className={styles['header']}>
         <LogoWithTitle />
-
         <div className={styles['authButton']}>
-          <Link href={'/'}>로그인</Link>
-          <Link href={'/'}>회원가입</Link>
+          <Link href={'/login'}>
+            <div className={styles['loginBtn']}>로그인</div>
+          </Link>
+          <Link href={'/signUp'}>
+            <div className={styles['signUpBtn']}>회원가입</div>
+          </Link>
         </div>
       </div>
     </>

@@ -7,8 +7,13 @@
   justify-content: space-between;
   align-items: center;
   position: fixed;
+  top: 0;
   z-index: 1;
   background-color: var(--white);
+}
+
+.dashboardHomeHeader {
+  @extend .header;
 }
 
 .boardTitle {
@@ -16,6 +21,16 @@
   font-size: 2rem;
   font-weight: 700;
   color: var(--black20);
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: inline;
+  }
+}
+
+.dashboardHomeBoardTitle {
+  @extend .boardTitle;
+  display: inline;
 }
 
 .headerRight {
@@ -27,6 +42,11 @@
 @media (max-width: 1023px) {
   .header {
     justify-content: flex-end;
+  }
+
+  .dashboardHomeHeader {
+    justify-content: space-between;
+    padding-left: 172px;
   }
 }
 
@@ -43,9 +63,14 @@
 }
 
 .userProfile {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
+  border: none;
+  cursor: pointer;
+
+  background-color: inherit;
 }
 
 .userProfile span {
@@ -60,7 +85,7 @@
   .header {
     height: 70px;
   }
-  
+
   .line {
     height: 38px;
     margin: 0 24px;
@@ -84,4 +109,77 @@
     width: 38px;
     height: 38px;
   }
+
+  .dashboardHomeHeader {
+    padding-left: 312px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardHomeHeader {
+    padding-left: 79px;
+  }
+}
+
+.koName {
+  display: none;
+
+  @media (min-width: 769px) {
+    display: inline;
+  }
+}
+
+.nicknameMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 13px;
+  position: absolute;
+  top: 50px;
+  left: -85px;
+  width: 125px;
+  z-index: 10;
+
+  border-radius: 8px;
+  border: 1px solid var(--gray20, #867272);
+  background: var(--white, #fff);
+
+  button {
+    border: none;
+    cursor: pointer;
+
+    background: var(--white);
+  }
+
+  hr {
+    width: 100%;
+    margin: 0;
+
+    border-color: var(--gray30);
+  }
+
+  @media (min-width: 769px) {
+    left: -30px;
+  }
+}
+
+.menuItem {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100%;
+
+  color: #000;
+  text-align: center;
+  font-size: 1.6rem;
+
+  &:hover {
+    background-color: var(--gray10);
+  }
+}
+
+.logout {
+  color: #ffab34;
 }

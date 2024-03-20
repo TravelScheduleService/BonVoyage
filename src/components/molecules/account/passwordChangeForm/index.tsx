@@ -16,8 +16,10 @@ const PasswordChangeForm = () => {
     formState: { errors },
   } = useForm<passwordFromProps>({ mode: 'all' }); // 사용하지는 않지만 register 에러 막기용
 
-  const [modal, setIsModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
+  const [modal, setModal] = useState({
+    isModalOpen: false,
+    modalMessage: '',
+  });
 
   const onSubmit = async (data: passwordFromProps) => {
     const res: any = await userChangePassword({
@@ -26,17 +28,21 @@ const PasswordChangeForm = () => {
     });
 
     if (res.status === 204) {
-      setIsModal(true);
-      setModalMessage('비밀번호가 변경되었습니다.');
+      setModal({
+        isModalOpen: true,
+        modalMessage: '비밀번호가 변경되었습니다.',
+      });
       reset();
       return;
     }
-    setIsModal(true);
-    setModalMessage('현재 비밀번호를 확인해주세요');
+    setModal({
+      isModalOpen: true,
+      modalMessage: '현재 비밀번호를 확인해주세요.',
+    });
   };
 
   const closeModal = () => {
-    setIsModal(false);
+    setModal({ isModalOpen: false, modalMessage: '' });
   };
 
   const watchFields = watch(['password', 'newPassword', 'newPasswordConfirm'], {
@@ -93,10 +99,10 @@ const PasswordChangeForm = () => {
             onClick={handleSubmit(onSubmit)}
             disabled={!watchFields.every((field) => field)}
           />
-          {modal && (
+          {modal.isModalOpen && (
             <BaseModal closeModal={closeModal}>
               <div className={styles.modalContainer}>
-                <p>{modalMessage}</p>
+                <p>{modal.modalMessage}</p>
                 <div className={styles.modalBtn}>
                   <Button
                     name="확인"
@@ -115,8 +121,3 @@ const PasswordChangeForm = () => {
 };
 export default PasswordChangeForm;
 
-// const [modal, setIsModal] = useState({
-//   isModalOpen: false,
-//   modalMessage: '',
-// });
-//모달 객체로 만들어서 하면 깔끔할듯

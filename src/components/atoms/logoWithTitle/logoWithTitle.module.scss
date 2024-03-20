@@ -1,5 +1,21 @@
 .logo {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+}
+
+.mobileLogo {
+  display: none;
+}
+
+
+@media (max-width : 768px){
+  .logo {
+    display: none;
+  }
+  .mobileLogo {
+    display: inline;
+  }
+
 }

@@ -1,19 +1,44 @@
 .header {
+  padding: 16px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:  16px 24px;
+  background: white;
   border-bottom: solid 1px var(--gray20, #eee);
+  position: sticky;
 
   .authButton {
     display: flex;
-    flex-direction: row;
-    gap: 20px;
-    font-size: 1.4rem;
+    gap: 10px;
     cursor: pointer;
+  }
 
-    @media (min-width: 375px) {
-      font-size: 1.6rem;
+  .loginBtn, .signUpBtn {
+    width: 70px;
+    height: 30px;
+    padding-top: 4px;
+    font-size: 1.3rem;
+    text-align: center;
+    background: var(--white, #ffffff);
+    color: var(--black30, #171717);
+    border-radius: 8px;
+    border: 2px solid var(--orange20, #fac171);
+  }
+
+  @media (min-width: 769px) {
+    padding: 20px 48px;
+    .loginBtn, .signUpBtn {
+      width: 120px;
+      height: 48px;
+      font-size: 2rem;
+      padding: 8px;
     }
   }
+  .loginBtn:hover, .signUpBtn:hover {
+    background: var(--orange20, #fac171);
+    color: var(--white, #ffffff);
+    transition: 0.3s;
+    scale: 1.1;
+  }
+
 }

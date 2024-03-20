@@ -3,15 +3,19 @@ import { useEffect, useState } from 'react';
 import { userInfoData } from '@/api/accountApi/accountApi';
 import React from 'react';
 import Layout from '@/components/molecules/layout';
-import { User } from '@/@types/type';
+import { UserContextProps } from '@/@types/type';
 
-export const userContext = React.createContext<User>({
-  id: 0,
-  email: '',
-  nickname: '',
-  profileImageUrl: '',
-  createdAt: '',
-  updatedAt: '',
+export const userContext = React.createContext<UserContextProps>({
+  userInfo: {
+    id: 0,
+    email: '',
+    nickname: '',
+    profileImageUrl: '',
+    createdAt: '',
+    updatedAt: '',
+  },
+  setUserInfo: () => {}, 
+  //userInfo를 업데이트 
 });
 
 const Mypage = () => {
@@ -34,7 +38,7 @@ const Mypage = () => {
   }, []);
 
   return (
-    <userContext.Provider value={userInfo}>
+    <userContext.Provider value={{ userInfo, setUserInfo }}>
       <Layout />
       <Account />
     </userContext.Provider>

@@ -146,3 +146,19 @@ export interface Column {
   updatedAt?: string;
   imageUrl: string;
 }
+
+export interface ProfileDownProps {
+  onBlur: React.FocusEventHandler<HTMLDivElement>;
+}
+
+export interface UserContextProps {
+  userInfo: {
+    id: number;
+    email: string;
+    nickname: string;
+    profileImageUrl: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  setUserInfo: (userInfo: any) => void;
+}

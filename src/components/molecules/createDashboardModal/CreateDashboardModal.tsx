@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { ChangeEvent, useState } from 'react';
 import CheckIcon from '@/components/icon/CheckIcon';
 import { CreateDashboard } from '@/@types/type';
-import CreateDoItYourselfInput from '@/components/atoms/input/createDoItYourselfCommonInput/CreateDoItYourselfInput';
+import ColorPalette from '../colorPalette/ColorPalette';
 
 const cn = classNames.bind(styles);
 
@@ -58,23 +58,11 @@ export default function CreateDashboardModal({
           <label>대시보드 이름</label>
           <input type="text" onChange={onChangeCreateDashboardTitle} />
         </div>
-        <div className={cn('palette')}>
-          {COLOR_NAMES.map((element, index) => {
-            return (
-              <div
-                key={index}
-                className={cn('paletteColor', element)}
-                onClick={() => onClickPaletteColor(element)}
-              >
-                {COLOR_LIST[element] === createDashboard.color && (
-                  <div className={cn('checkIcon')}>
-                    <CheckIcon color="white" />
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+        <ColorPalette
+          colorList={COLOR_LIST}
+          colorNameList={COLOR_NAMES}
+          onClickPaletteColor={onClickPaletteColor}
+        />
         <div className={cn('modalButtons')}>
           <button className={cn('modalCancel')} onClick={onClickCloseModal}>
             취소

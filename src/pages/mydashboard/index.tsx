@@ -1,4 +1,3 @@
-import instance from '@/api/axios';
 import SideBar from '@/components/atoms/sideBar/SideBar';
 import MyHeader from '@/components/molecules/myHeader/MyHeader';
 import styles from './myDashboard.module.scss';
@@ -13,6 +12,7 @@ import {
   getMyDashboardList,
   putInviteAnswer,
 } from '@/api/dashboardListApi/dashboardListApi';
+import HeaderMyDashboard from '@/components/molecules/header/headerMyDashboard/HeaderMyDashboard';
 
 const cn = classNames.bind(styles);
 
@@ -136,7 +136,9 @@ export default function MyDashboard() {
     if (user) {
       setUser(JSON.parse(user));
     }
+  }, []);
 
+  useEffect(() => {
     async function setMyDashboardList() {
       try {
         const response = await getMyDashboardList(dashboardListPage);
@@ -156,12 +158,8 @@ export default function MyDashboard() {
 
   return (
     <div className={cn('background')}>
+      <HeaderMyDashboard isNotDashboardHome={false} koName={user?.nickname} />
       <SideBar />
-      <MyHeader
-        title="내 대시보드"
-        profileImageUrl={user?.profileImageUrl ?? '/assets/icon/logo.svg'}
-        nickname={user?.nickname ?? 'unknown'}
-      />
       <section className={cn('section')}>
         <MyDashboardList
           dashboardList={dashboardList}

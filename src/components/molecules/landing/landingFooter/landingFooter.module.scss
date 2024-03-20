@@ -1,0 +1,33 @@
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 80px;
+  text-align: center;
+
+
+  .footerText{
+    display: flex;
+    gap: 20px;
+    margin: 0;
+  }
+
+  .footerlogo{
+    display: flex;
+    gap: 20px;
+    padding-top: 60px;
+  }
+
+  @media (min-width: 769px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between ;
+    padding:0 150px 50px;
+
+    .footerlogo{
+      padding-top: 0;
+    }
+  }
+
+}

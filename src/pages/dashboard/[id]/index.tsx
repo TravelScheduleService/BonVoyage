@@ -38,7 +38,6 @@ export default function Dashboard() {
   }, [id]);
 
   if (!dashboard) return null;
-  console.log(dashboard);
 
   return (
     <div className={styles['background']}>

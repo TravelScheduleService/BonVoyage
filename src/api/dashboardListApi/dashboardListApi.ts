@@ -1,13 +1,13 @@
 import { CreateDashboard } from '@/@types/type';
 import instance from '../axios';
 
-export async function getMyDashboardList(dashboardListPage: number) {
+export async function getMyDashboardList(dashboardListPage: number, size = 5) {
   try {
     const { data } = await instance.get('/dashboards', {
       params: {
         navigationMethod: 'pagination',
         page: dashboardListPage,
-        size: 5,
+        size: size,
       },
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,

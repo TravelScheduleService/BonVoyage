@@ -3,16 +3,21 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import ProfileDown from '../profileDropdown/index';
 
 const cn = classNames.bind(styles);
 
 interface Props {
-  title: string;
+  title?: string;
   profileImageUrl: string;
   nickname: string;
 }
 
-export default function MyHeader({ title, profileImageUrl, nickname }: Props) {
+export default function MyHeader({
+  title = '내 대시보드',
+  profileImageUrl,
+  nickname,
+}: Props) {
   const [isOpenNicknameMenu, setIsOpenNicknameMenu] = useState(false);
 
   const onBlurName = () => {
@@ -36,18 +41,7 @@ export default function MyHeader({ title, profileImageUrl, nickname }: Props) {
               {nickname}
             </button>
             {isOpenNicknameMenu && (
-              <div
-                className={cn('nicknameMenu')}
-                onBlur={() => setIsOpenNicknameMenu(false)}
-              >
-                <button className={cn('menuItem')}>
-                  <Link href="/mypage">마이페이지</Link>
-                </button>
-                <hr />
-                <button className={cn('menuItem', 'logout')}>
-                  <Link href="/">로그아웃</Link>
-                </button>
-              </div>
+              <ProfileDown onBlur={() => setIsOpenNicknameMenu(false)}/>
             )}
           </div>
         </div>

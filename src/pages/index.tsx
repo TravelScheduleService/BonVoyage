@@ -1,23 +1,32 @@
-import Link from 'next/link';
+import styles from '@/styles/Home.module.scss';
+import HeaderAuth from '@/components/molecules/header/headerAuth/HeaderAuth';
+import LandingHeader from '@/components/molecules/landing/landingHeader';
+import LandingMain from '@/components/molecules/landing/landingMain';
+import LandingFooter from '@/components/molecules/landing/landingFooter';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const index = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('accessToken');
+    if (token) {
+      router.push('/mydashboard');
+    }
+  }, []);
+  // 로그인 되어있으면 mydashboard로 이동
+
   return (
-    <>
-      <Link href={'/'}>index</Link>
-      <br />
-      <Link href={'/login'}>Login</Link>
-      <br />
-      <Link href={'/signUp'}>signUp</Link>
-      <br />
-      <Link href={'/mypage'}>mypage</Link>
-      <br />
-      <Link href={'/mydashboard'}>mydashboard</Link>
-      <br />
-      <Link href={'/editdashboard'}>editdashboard</Link>
-      <br />
-    </>
+    <div className={styles.container}>
+      <HeaderAuth />
+      <div className={styles.mainContent}>
+        <LandingHeader />
+        <LandingMain />
+      </div>
+      <LandingFooter />
+    </div>
   );
 };
 
 export default index;
-// 여기는 메인 랜딩페이지 들어갈 곳

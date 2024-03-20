@@ -12,6 +12,7 @@
   flex-direction: column;
   gap: 40px;
   padding: 16px 10px 16px 80px;
+  margin-top: 60px;
 
   @media (min-width: 375px) {
     padding: 24px 24px 24px 91px;
@@ -19,6 +20,7 @@
 
   @media (min-width: 769px) {
     padding: 40px 40px 117px 200px;
+    margin-top: 70px;
   }
 
   @media (min-width: 1024px) {
