@@ -1,9 +1,8 @@
-import { StaticImageData } from 'next/image';
 import {
+  ButtonHTMLAttributes,
   ChangeEventHandler,
   ForwardedRef,
   HTMLInputTypeAttribute,
-  InputHTMLAttributes,
   ReactNode,
 } from 'react';
 import { ChangeHandler } from 'react-hook-form';
@@ -19,19 +18,16 @@ export interface ButtonProps {
   nowPage?: number;
   totalPage?: number;
   icon?: ReactNode;
-  buttonProps?: InputHTMLAttributes<HTMLButtonElement>;
+  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 // 할 일 모달 Input props
-export interface CreateDoItYourselfProps {
+export interface CreateDoItYourselfProps
+  extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   content?: string;
-  className?: string;
-  value?: string;
   icon?: ReactNode;
-  name?: string;
   ref?: ForwardedRef<HTMLInputElement>;
-  required?: boolean;
   isVertical?: boolean;
   isSpecialInput?: boolean; // 특수한 input이 필요한 경우 사용
   type?: HTMLInputTypeAttribute | 'textarea';
@@ -153,16 +149,4 @@ export interface Column {
 
 export interface ProfileDownProps {
   onBlur: React.FocusEventHandler<HTMLDivElement>;
-}
-
-export interface UserContextProps {
-  userInfo: {
-    id: number;
-    email: string;
-    nickname: string;
-    profileImageUrl: string;
-    createdAt: string;
-    updatedAt: string;
-  };
-  setUserInfo: (userInfo: any) => void;
 }

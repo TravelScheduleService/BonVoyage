@@ -45,6 +45,7 @@ const Button = ({
         className={cn(classNames(type, color), 'button')}
         disabled={disabled}
         onClick={onClick}
+        type="button"
         {...buttonProps}
       >
         {icon && <span className={styles.icon}>{icon}</span>}

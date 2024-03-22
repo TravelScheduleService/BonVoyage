@@ -1,25 +1,19 @@
-import '@/styles/globals.css';
+import { User } from '@/@types/type';
+import { UserContextProvider } from '@/hooks/useAuth';
 import '@/styles/datePicker.css';
-import 'react-datepicker/dist/react-datepicker.css';
-import { UserContextProps } from '@/@types/type';
-import React, { useState, useEffect } from 'react';
-import { userInfoData } from '@/api/accountApi/accountApi';
+import '@/styles/globals.css';
+import { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
+import { useState } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 
-export const userContext = React.createContext<UserContextProps>({
-  userInfo: {
-    id: 0,
-    email: '',
-    nickname: '',
-    profileImageUrl: '',
-    createdAt: '',
-    updatedAt: '',
-  },
-  setUserInfo: () => {},
-});
-
-function App({ Component, pageProps }: AppProps) {
-  const [userInfo, setUserInfo] = useState({
+function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
+  console.log('session', session);
+  const [userInfo, setUserInfo] = useState<User>({
     id: 0,
     email: '',
     nickname: '',
@@ -28,20 +22,13 @@ function App({ Component, pageProps }: AppProps) {
     updatedAt: '',
   });
 
-  const getUserInfo = async () => {
-    const userData = await userInfoData();
-    setUserInfo(userData);
-  };
-
-  useEffect(() => {
-    getUserInfo();
-  }, []);
-
   return (
-    <userContext.Provider value={{ userInfo, setUserInfo }}>
-      <div id="modal" />
-      <Component {...pageProps} />
-    </userContext.Provider>
+    <UserContextProvider value={{ userInfo, setUserInfo }}>
+      <SessionProvider session={session}>
+        <div id="modal" />
+        <Component {...pageProps} />
+      </SessionProvider>
+    </UserContextProvider>
   );
 }
 export default App;

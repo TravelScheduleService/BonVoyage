@@ -3,16 +3,15 @@ import { login } from '@/api/auth/authApi';
 import Button from '@/components/atoms/buttons/button';
 import EmailInput from '@/components/atoms/input/emailInput/EmailInput';
 import PasswordInput from '@/components/atoms/input/passwordInput/PasswordInput';
+import useAuth from '@/hooks/useAuth';
 import useSessionStorage from '@/hooks/useSessionStorage';
 import { AxiosError } from 'axios';
-import { signIn } from 'next-auth/react';
-import dynamic from 'next/dynamic';
+import { getSession, signIn } from 'next-auth/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './login.module.scss';
-import { useContext } from 'react';
-import { userContext } from '@/pages/_app';
 
 interface SignInProps extends AuthRequest {
   email: string;
@@ -21,10 +20,8 @@ interface SignInProps extends AuthRequest {
   passwordConfirm: string;
 }
 
-const DynamicImage = dynamic(() => import('next/image'));
-
 const MobileLogo = () => (
-  <DynamicImage
+  <Image
     src="/assets/icon/bonVoyageMobileLogo.svg"
     width={150}
     height={150}
@@ -33,7 +30,7 @@ const MobileLogo = () => (
 );
 
 const DesktopLogo = () => (
-  <DynamicImage
+  <Image
     src="/assets/icon/bonVoyageLogo.svg"
     width={500}
     height={100}
@@ -42,7 +39,7 @@ const DesktopLogo = () => (
 );
 
 const GoogleIcon = () => (
-  <DynamicImage
+  <Image
     src="/assets/icon/googleIcon.svg"
     width={20}
     height={20}
@@ -52,7 +49,7 @@ const GoogleIcon = () => (
 );
 
 const KakaoIcon = () => (
-  <DynamicImage
+  <Image
     src="/assets/icon/kakaotalkIcon.svg"
     width={20}
     height={20}
@@ -61,11 +58,7 @@ const KakaoIcon = () => (
 );
 
 export default function Login() {
-  const [accessToken, setAccessToken] = useSessionStorage(
-    'accessToken', // key for sessionStorage
-    '', // 초기값
-    true, // JSON 형태로 저장하지 않음
-  );
+  const { setAccessToken, setUserInfo } = useAuth();
   const [user, setUser] = useSessionStorage<User | {}>('user', {});
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
@@ -77,8 +70,6 @@ export default function Login() {
     clearErrors,
     formState: { errors, isValid },
   } = form;
-
-  const { setUserInfo } = useContext(userContext); // 추가
 
   const onSubmit: SubmitHandler<SignInProps> = async (payload: AuthRequest) => {
     clearErrors('root');
@@ -143,12 +134,21 @@ export default function Login() {
           <div className={styles.errorMessage}>{errors.root.message}</div>
         )}
         <hr className={styles.divider} />
-        <Button name="구글로 로그인" type="google" icon={GoogleIcon()} />
         <Button
-          name="카카오 로그인"
-          type="kakao"
+          icon={GoogleIcon()}
+          name="구글로 로그인"
+          onClick={() => signIn('google', { callbackUrl: '/mydashboard' })}
+          type="google"
+        />
+        <Button
           icon={KakaoIcon()}
-          onClick={() => signIn('kakao')} // , { callbackUrl: '/mydashboard' }
+          name="카카오 로그인"
+          onClick={async () => {
+            signIn('kakao'); //, { callbackUrl: '/mydashboard' });
+            const session = await getSession();
+            console.log(session);
+          }}
+          type="kakao"
         />
       </form>
       <div className={styles.signUpLinkBox}>

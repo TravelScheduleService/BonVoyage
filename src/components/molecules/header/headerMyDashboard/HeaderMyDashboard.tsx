@@ -1,12 +1,11 @@
-import styles from './headerMyDashboard.module.scss';
-import classNames from 'classnames/bind';
 import HeaderBtn from '@/components/atoms/buttons/headerBtn';
-import Image from 'next/image';
 import ProfileIcon from '@/components/atoms/profileIcon/ProfileIcon';
-import { useState } from 'react';
 import ProfileDown from '@/components/molecules/profileDropdown/index';
-import { useContext } from 'react';
-import { userContext } from '@/pages/_app';
+import useAuth from '@/hooks/useAuth';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+import { useState } from 'react';
+import styles from './headerMyDashboard.module.scss';
 
 const cn = classNames.bind(styles);
 
@@ -25,8 +24,8 @@ export default function HeaderMyDashboard({
   isDashboard = false,
   ismyDashboard = false,
 }: Props) {
+  const { userInfo } = useAuth();
   const [isOpenNicknameMenu, setIsOpenNicknameMenu] = useState(false);
-  const { userInfo } = useContext(userContext);
 
   return (
     <>
@@ -68,10 +67,10 @@ export default function HeaderMyDashboard({
             onClick={() => setIsOpenNicknameMenu((preState) => !preState)}
             onBlur={() => setTimeout(() => setIsOpenNicknameMenu(false), 100)}
           >
-            <ProfileIcon name={name} profile={userInfo.profileImageUrl} />
+            <ProfileIcon name={name} profile={userInfo?.profileImageUrl} />
             <span className={styles['name']}>{userInfo.nickname}</span>
             {isOpenNicknameMenu && (
-              <ProfileDown onBlur={() => setIsOpenNicknameMenu(false)}/>
+              <ProfileDown onBlur={() => setIsOpenNicknameMenu(false)} />
             )}
           </button>
         </div>

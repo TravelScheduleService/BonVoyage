@@ -1,21 +1,20 @@
-import styles from './profileForm.module.scss';
-import ProfileImageInput from '@/components/molecules/profileImageInput/index';
-import Button from '@/components/atoms/buttons/button';
-import { useState, useContext } from 'react';
-import { userContext } from '@/pages/_app';
+import { UserChangeAccountProps } from '@/@types/type';
 import { userChangeAccount } from '@/api/accountApi/accountApi';
-import CommonInput from '@/components/atoms/input/common/CommonInput';
-import { useForm } from 'react-hook-form';
-import { UserChangeAccountProps, UserContextProps } from '@/@types/type';
 import BaseModal from '@/components/atoms/baseModal/BaseModal';
+import Button from '@/components/atoms/buttons/button';
+import CommonInput from '@/components/atoms/input/common/CommonInput';
+import ProfileImageInput from '@/components/molecules/profileImageInput/index';
+import useAuth, { UserContextProps } from '@/hooks/useAuth';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import styles from './profileForm.module.scss';
 
 const ProfileForm = () => {
   const { handleSubmit, register, watch } = useForm<UserChangeAccountProps>({
     mode: 'all',
   });
 
-  const userInfo = useContext(userContext);
-  const userData = userInfo.userInfo;
+  const { userInfo: userData, setUserInfo } = useAuth();
 
   const [profileImage, setProfileImage] = useState<string>('');
   const [modal, setModal] = useState({
@@ -32,7 +31,7 @@ const ProfileForm = () => {
 
       setModal({ isModalOpen: true, modalMessage: '프로필이 변경되었습니다.' });
 
-      userInfo.setUserInfo((prevState: UserContextProps) => ({
+      setUserInfo((prevState: UserContextProps) => ({
         ...prevState,
         nickname: data.nickname || userData.nickname,
         profileImageUrl: profileImage || userData.profileImageUrl,
