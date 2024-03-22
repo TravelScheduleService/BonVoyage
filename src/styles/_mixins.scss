@@ -2,10 +2,14 @@
   background-size: cover;
   background-position: right;
   background-attachment: fixed;
-  animation: moveBackground 50s linear infinite;
+  animation: moveBackground 30s linear infinite;
 
   @media (orientation: landscape) {
     background-size: 110% auto;
+
+    @media (min-width: 605px) and (max-width: 1081px) {
+      background-size: cover;
+    }
   }
 }
 

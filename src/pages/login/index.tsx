@@ -5,6 +5,7 @@ import EmailInput from '@/components/atoms/input/emailInput/EmailInput';
 import PasswordInput from '@/components/atoms/input/passwordInput/PasswordInput';
 import useSessionStorage from '@/hooks/useSessionStorage';
 import { AxiosError } from 'axios';
+import { signIn } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -143,7 +144,12 @@ export default function Login() {
         )}
         <hr className={styles.divider} />
         <Button name="구글로 로그인" type="google" icon={GoogleIcon()} />
-        <Button name="카카오 로그인" type="kakao" icon={KakaoIcon()} />
+        <Button
+          name="카카오 로그인"
+          type="kakao"
+          icon={KakaoIcon()}
+          onClick={() => signIn('kakao')} // , { callbackUrl: '/mydashboard' }
+        />
       </form>
       <div className={styles.signUpLinkBox}>
         회원이 아니신가요?
