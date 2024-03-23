@@ -11,9 +11,22 @@ import CreateCardModal from '../modals/createCardModal/CreateCardModal';
 import EditColumnModal from '../modals/editColumnModal/EditColumnModal';
 import instance from '@/api/axios';
 import { Column } from '@/@types/type';
+import { CardsProvider } from '@/components/context/CardsContext';
+import { cardsAtom } from '@/components/atoms/atoms';
 
 interface CardSectionProps {
   dashboardId: number;
+}
+
+interface Card {
+  id: number;
+  title: string;
+  imageUrl: string;
+  tags: string[];
+  createdAt: string;
+  assignee: {
+    profileImageUrl: string;
+  };
 }
 
 export default function CardSection({ dashboardId }: CardSectionProps) {
@@ -21,6 +34,11 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
   const [isEditColumnModalOpen, setIsEditColumnModalOpen] = useState(false);
   const [columns, setColumns] = useState<Column[]>([]);
   const [selectedColumn, setSelectedColumn] = useState<Column | null>(null);
+  const [cards, setCards] = useState<Card[]>([]);
+
+  const handleCardsData = (cardsData) => {
+    setCards(cardsData);
+  };
 
   async function getColumns() {
     try {
@@ -60,6 +78,7 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
   }, [dashboardId]);
 
   return (
+    // <CardsProvider>
     <div className={styles['cardSection']}>
       {columns?.map((column) => (
         <div key={column.id} className={styles['column']}>
@@ -67,7 +86,8 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
             <div className={styles['titleArea']}>
               <ColorDot colorName="blue"></ColorDot>
               <h1 className={styles['title']}>{column.title}</h1>
-              <ChipNumber number="3"></ChipNumber>
+              {/* <ChipNumber number="0"></ChipNumber> */}
+              <ChipNumber number={cards.length}></ChipNumber>
             </div>
             <Image
               onClick={() => handleSettingButtonClick(column)}
@@ -80,7 +100,12 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
             type="addTodo"
             onClick={() => handleAddCardButtonClick(column)}
           />
-          <Card columnId={column.id} columnTitle={column.title} />
+          <Card
+            columnId={column.id}
+            columnTitle={column.title}
+            handleCardsData={handleCardsData}
+            cards={cards}
+          />
         </div>
       ))}
       {isCreateCardModalOpen && (
@@ -95,5 +120,6 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
         />
       )}
     </div>
+    // </CardsProvider>
   );
 }

@@ -2,7 +2,7 @@ import styles from './profileForm.module.scss';
 import ProfileImageInput from '@/components/molecules/profileImageInput/index';
 import Button from '@/components/atoms/buttons/button';
 import { useState, useContext } from 'react';
-import { userContext } from '@/pages/mypage/index';
+import { userContext } from '@/pages/_app';
 import { userChangeAccount } from '@/api/accountApi/accountApi';
 import CommonInput from '@/components/atoms/input/common/CommonInput';
 import { useForm } from 'react-hook-form';
@@ -46,7 +46,7 @@ const ProfileForm = () => {
     nickname: '',
   });
 
-  const isButtonDisabled = !profileImage  && !watchFiled[0] ;
+  const isButtonDisabled = !profileImage && !watchFiled[0];
 
   const closeModal = () => {
     setModal({ isModalOpen: false, modalMessage: '' });

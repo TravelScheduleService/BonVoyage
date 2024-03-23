@@ -6,25 +6,32 @@ import ChipTagWithoutX from '@/components/atoms/chipTag/ChipTagWithoutX';
 import instance from '@/api/axios';
 import { format } from 'date-fns';
 import CardDetailModal from '../modals/cardDetailModal/CardDetailModal';
+import { useCardsContext } from '@/components/context/CardsContext';
 
-interface Card {
-  id: number;
-  title: string;
-  imageUrl: string;
-  tags: string[];
-  createdAt: string;
-  assignee: {
-    profileImageUrl: string;
-  };
-}
+// interface Card {
+//   id: number;
+//   title: string;
+//   imageUrl: string;
+//   tags: string[];
+//   createdAt: string;
+//   assignee: {
+//     profileImageUrl: string;
+//   };
+// }
 
 interface CardProps {
   columnId: number;
   columnTitle: string;
 }
 
-export default function Card({ columnId, columnTitle }: CardProps) {
-  const [cards, setCards] = useState<Card[]>([]);
+export default function Card({
+  columnId,
+  columnTitle,
+  handleCardsData,
+  cards,
+}: CardProps) {
+  // const [cards, setCards] = useState<Card[]>([]);
+  // const { cards, setCards } = useCardsContext();
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [clickedCardId, setClickedCardId] = useState<number | null>(null);
 
@@ -40,7 +47,8 @@ export default function Card({ columnId, columnTitle }: CardProps) {
         },
       );
       const nextCards = res.data.cards;
-      setCards(nextCards);
+      handleCardsData(nextCards);
+      // setCards(nextCards);
     } catch (error) {
       console.error('Error fetching cards:', error);
     }

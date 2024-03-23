@@ -2,12 +2,12 @@ import Image from 'next/image';
 import styles from './profileIcon.module.scss';
 
 type props = {
-  name: string;
+  name?: string;
   profile?: string;
 };
 
 export default function ProfileIcon({ name, profile }: props) {
-  const firstCharacter = name.slice(0, 1);
+  const firstCharacter = name?.slice(0, 1);
 
   return (
     <div className={styles['icon']}>

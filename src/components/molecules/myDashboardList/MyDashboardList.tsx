@@ -64,6 +64,9 @@ export default function MyDashboardList({
                     key={element.id}
                     name={element.title}
                     src={<ColorDot colorName={element.color} />}
+                    src2={
+                      element.createdByMe ? '/assets/icon/crownIcon.svg' : ''
+                    }
                   />
                 </Link>
               </div>

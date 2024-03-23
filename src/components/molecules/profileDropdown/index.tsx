@@ -18,7 +18,7 @@ const ProfileDown = ({ onBlur }: ProfileDownProps) => {
   return (
     <div className={cn('nicknameMenu')} onBlur={onBlur}>
       <button className={cn('menuItem')}>
-        <Link href="/mypage">마이페이지</Link>
+        <Link href="/myPage">마이페이지</Link>
       </button>
       <hr />
       <button className={cn('menuItem', 'logout')} onClick={handleLogout}>
@@ -29,4 +29,3 @@ const ProfileDown = ({ onBlur }: ProfileDownProps) => {
 };
 
 export default ProfileDown;
-// onBlur?

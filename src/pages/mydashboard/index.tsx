@@ -158,9 +158,9 @@ export default function MyDashboard() {
   return (
     <div className={cn('background')}>
       <HeaderMyDashboard
-        isNotDashboardHome={false}
-        koName={user?.nickname}
+        name={user?.nickname}
         profile={user?.profileImageUrl}
+        ismyDashboard={true}
       />
       <SideBar />
       <section className={cn('section')}>
