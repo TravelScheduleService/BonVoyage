@@ -12,7 +12,6 @@ function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
-  console.log('session', session);
   const [userInfo, setUserInfo] = useState<User>({
     id: 0,
     email: '',

@@ -1,8 +1,10 @@
+import LogoWithTitle from '@/components/atoms/logoWithTitle/LogoWithTitle';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import styles from './headerAuth.module.scss';
-import LogoWithTitle from '@/components/atoms/logoWithTitle/LogoWithTitle';
 
 export default function HeaderAuth() {
+  const session = useSession();
   return (
     <>
       <div className={styles['header']}>

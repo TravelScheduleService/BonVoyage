@@ -1,18 +1,18 @@
-import React from 'react';
-import classNames from 'classnames/bind';
-import Link from 'next/link';
-import styles from './profileDropdown.module.scss';
-import { useRouter } from 'next/router';
 import { ProfileDownProps } from '@/@types/type';
+import classNames from 'classnames/bind';
+import { signOut } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styles from './profileDropdown.module.scss';
 
 const cn = classNames.bind(styles);
 
 const ProfileDown = ({ onBlur }: ProfileDownProps) => {
   const router = useRouter();
-  const handleLogout = () => {
+  const handleLogout = async () => {
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('user');
-    router.push('/');
+    await signOut({ callbackUrl: '/' });
   };
 
   return (

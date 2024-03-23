@@ -34,15 +34,33 @@ export default function useAuth() {
 
   const getUserInfo = async () => {
     const userData = await userInfoData();
-    setUserInfo(userData);
+    if (userData) {
+      setUserInfo(userData);
+    }
   };
 
   useEffect(() => {
     if (accessToken) {
       getUserInfo();
+      return;
+    }
+    if (!data) {
+      return;
+    }
+    const { user } = data;
+    if (user) {
+      setUserInfo({
+        email: user.email,
+        nickname: user.name,
+        profileImageUrl: user.image,
+      });
+      const { accessToken } = user as any;
+      if (accessToken) {
+        setAccessToken(accessToken);
+      }
     }
     // eslint-disable-next-line
-  }, [accessToken]);
+  }, [accessToken, data]);
 
   return {
     accessToken,

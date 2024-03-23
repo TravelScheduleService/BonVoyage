@@ -10,7 +10,12 @@ import { useForm } from 'react-hook-form';
 import styles from './profileForm.module.scss';
 
 const ProfileForm = () => {
-  const { handleSubmit, register, watch } = useForm<UserChangeAccountProps>({
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm<UserChangeAccountProps>({
     mode: 'all',
   });
 
@@ -58,9 +63,10 @@ const ProfileForm = () => {
       <form className={styles.inputContainer} onSubmit={handleSubmit(onSubmit)}>
         <CommonInput
           label="이메일"
-          placeholder={userData.email}
+          placeholder="이메일을 입력해주세요"
+          defaultValue={userData.email}
           disabled={true}
-          errors={{}}
+          errors={errors}
           type="email"
           name="email"
           register={register}
@@ -68,7 +74,8 @@ const ProfileForm = () => {
         <CommonInput
           label="닉네임"
           placeholder="닉네임을 입력해주세요"
-          errors={{}}
+          defaultValue={userData.nickname}
+          errors={errors}
           type="text"
           name="nickname"
           register={register}
