@@ -17,6 +17,7 @@
 .menuTitleArea {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 40px;
 }
 
@@ -24,6 +25,19 @@
   font-size: 1.2rem;
   color: var(--gray50);
   display: none;
+}
+
+.addBox {
+  width: fit-content;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+
+  background-color: inherit;
+  border: none;
 }
 
 .pagenation {

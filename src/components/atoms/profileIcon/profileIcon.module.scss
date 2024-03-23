@@ -1,6 +1,6 @@
 .icon {
-  width: 34px;
-  height: 34px;
+  width: 47px;
+  height: 47px;
   background-color: #a3c4a2;
   display: flex;
   justify-content: center;
@@ -11,15 +11,21 @@
   font-weight: 600;
   border-radius: 50%;
   border: solid 2px var(--white, #fff);
+  overflow: hidden;
 }
 
 .image {
   position: relative;
-  width: 34px;
-  height: 34px;
+  width: 47px;
+  height: 47px;
 
   @media (min-width: 769px) {
-    width: 38px;
-    height: 38px;
+    width: 47px;
+    height: 47px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 47px;
+    height: 47px;
   }
 }

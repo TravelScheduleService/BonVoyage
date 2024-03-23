@@ -47,7 +47,7 @@ export interface MemberProfile {
 
 export interface MyDashboardProps extends ButtonProps {
   src: JSX.Element;
-  src2?: StaticImageData;
+  src2?: string;
   iconAlt?: string;
 }
 

@@ -3,24 +3,21 @@ import SideBar from '@/components/atoms/sideBar/SideBar';
 import CardSection from '@/components/molecules/cardSection/CardSection';
 import HeaderMyDashboard from '@/components/molecules/header/headerMyDashboard/HeaderMyDashboard';
 import CreateColumnModal from '@/components/molecules/modals/createColumnModal/CreateColumnModal';
-import MyHeader from '@/components/molecules/myHeader/MyHeader';
 import styles from '@/styles/dashboard.module.scss';
-import axios from 'axios';
+import axios from '@/api/axios';
 import { useRouter } from 'next/router';
+import { User } from '@/@types/type';
 import React, { useEffect, useState } from 'react';
-
-interface Props {
-  targetId: string;
-}
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dashboard, setDashboard] = useState();
+  const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const { id } = router.query;
 
-  async function getDashboard({ targetId }: Props) {
-    const res = await axios.get(`/dashboard/${targetId}`);
+  async function getDashboard(targetId: string) {
+    const res = await axios.get(`/dashboards/${targetId}`);
     const nextDashboard = res.data;
     setDashboard(nextDashboard);
   }
@@ -42,7 +39,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles['background']}>
-      {/* <MyHeader profileImageUrl="/assets/icon/logo.svg" nickname="배유철" /> */}
+      <HeaderMyDashboard boardTitle={dashboard.title} isDashboard={true} />
       <SideBar />
       <section className={styles['section']}>
         <CardSection dashboardId={id} />

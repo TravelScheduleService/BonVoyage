@@ -3,10 +3,16 @@ import Image from 'next/image';
 import styles from './logoWithTitle.module.scss';
 
 export default function LogoWithTitle() {
+  let getToken = '';
+
+  if (typeof window !== 'undefined') {
+    getToken = sessionStorage.getItem('accessToken') ?? '';
+  }
+
   return (
     <>
       <div className={styles['logo']}>
-        <Link href={'/'}>
+        <Link href={getToken ? '/mydashboard' : '/'}>
           <Image
             src="/assets/icon/bonVoyageLogo.svg"
             width={230}
@@ -16,7 +22,7 @@ export default function LogoWithTitle() {
         </Link>
       </div>
       <div className={styles['mobileLogo']}>
-        <Link href={'/'}>
+        <Link href={getToken ? '/mydashboard' : '/'}>
           <Image
             src="/assets/icon/logo.svg"
             width={30}

@@ -17,7 +17,7 @@ export default function editdashboard() {
   };
   return (
     <div className={styles['background']}>
-      <HeaderMyDashboard />
+      <HeaderMyDashboard isDashboard={true} />
       <SideBar />
       <div className={styles['components']}>
         <button className={styles.return} onClick={goBack}>

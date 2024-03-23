@@ -19,6 +19,7 @@
   background: white;
   padding: 14px 20px;
   border-radius: 8px;
+  height: 700px;
   // text-align: center;
   // position: relative;
   // display: flex;
@@ -121,6 +122,9 @@
   // flex-direction: row;
   align-items: center;
 }
+.profileImage {
+  border-radius: 50%;
+}
 .writerName {
   font-size: 1.2rem;
   margin-left: 8px;
@@ -136,6 +140,14 @@
   font-size: 1.2rem;
   color: var(--black20);
   margin-left: 30px;
+}
+
+.editCommentInput {
+  border: 1px solid var(--gray30);
+  border-radius: 10px;
+  margin-left: 30px;
+  padding: 7px;
+  font-size: 1.2rem;
 }
 
 .buttonArea {

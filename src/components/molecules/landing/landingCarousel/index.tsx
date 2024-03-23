@@ -1,6 +1,5 @@
 import { TouchEventHandler, useEffect, useRef, useState } from 'react';
 import styles from './LandingCarousel.module.scss';
-import { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import ForwardArrowIcon from '@/../../public/assets/icon/forwardArrowIcon.svg';
 import LeftArrowIcon from '@/../../public/assets/icon/leftArrowIcon.svg';
@@ -25,8 +24,7 @@ const LandingCarousel = ({ carouselList }: LandingCarouselProps) => {
     const pw = carouselRef.current?.getBoundingClientRect().width;
     const cw = (
       carouselRef.current?.childNodes[0] as HTMLLIElement
-    ).getBoundingClientRect().width;
-
+    )?.getBoundingClientRect().width;
     if (cw === undefined || pw === undefined) return;
     setRatio(cw / pw);
   };
@@ -47,9 +45,10 @@ const LandingCarousel = ({ carouselList }: LandingCarouselProps) => {
   }, [carouselList, currIndex, carouselElement]);
 
   useEffect(() => {
-    window.addEventListener('onLoad', handleResize);
-    document.addEventListener('resize', handleResize);
     window.addEventListener('resize', handleResize);
+    setTimeout(() => {
+      handleResize();
+    }, 100);
   }, []);
 
   const moveToNthSlide = (index: number) => {

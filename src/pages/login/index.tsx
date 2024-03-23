@@ -10,6 +10,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './login.module.scss';
+import { useContext } from 'react';
+import { userContext } from '@/pages/_app';
 
 interface SignInProps extends AuthRequest {
   email: string;
@@ -75,12 +77,15 @@ export default function Login() {
     formState: { errors, isValid },
   } = form;
 
+  const { setUserInfo } = useContext(userContext); // 추가
+
   const onSubmit: SubmitHandler<SignInProps> = async (payload: AuthRequest) => {
     clearErrors('root');
     try {
       const { accessToken, user } = await login(payload);
       setAccessToken(accessToken);
       setUser(user);
+      setUserInfo(user); // user정보를 로그인하고 바로 업데이트
       router.push('/mydashboard');
     } catch (error) {
       const axiosError = error as AxiosError<AuthResponse>;
