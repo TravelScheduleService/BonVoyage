@@ -24,8 +24,7 @@ const LandingCarousel = ({ carouselList }: LandingCarouselProps) => {
     const pw = carouselRef.current?.getBoundingClientRect().width;
     const cw = (
       carouselRef.current?.childNodes[0] as HTMLLIElement
-    ).getBoundingClientRect().width;
-
+    )?.getBoundingClientRect().width;
     if (cw === undefined || pw === undefined) return;
     setRatio(cw / pw);
   };
@@ -47,6 +46,9 @@ const LandingCarousel = ({ carouselList }: LandingCarouselProps) => {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
+    setTimeout(() => {
+      handleResize();
+    }, 100);
   }, []);
 
   const moveToNthSlide = (index: number) => {

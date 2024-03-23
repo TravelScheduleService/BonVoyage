@@ -1,0 +1,12 @@
+.container {
+  width: 47px;
+  height: 47px;
+  background-color: #a3c4a2;
+  border-radius: 50%;
+  color: var(--white, #fff);
+  font-size: 1.4rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

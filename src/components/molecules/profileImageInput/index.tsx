@@ -6,11 +6,15 @@ import { userUploadImage } from '@/api/accountApi/accountApi';
 const cn = classNames.bind(styles);
 interface Props {
   size: 'small' | 'big';
-  onImageSelected: (imageUrl: string) => void; //추가, 이미지 선택시 부모 컴포넌트에게 이미지 url 전달
+  onImageSelected: (imageUrl: string) => void;
+  initialImageUrl: string;
 }
-export default function ProfileImageInput({ size, onImageSelected }: Props) {
-  // onImageSelected 추가
-  const [imageUrl, setImageUrl] = useState('');
+export default function ProfileImageInput({
+  size,
+  onImageSelected,
+  initialImageUrl,
+}: Props) {
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);
   const imageInput = useRef<HTMLInputElement>(null);
 
   const onClickImageBox = () => {
@@ -22,12 +26,12 @@ export default function ProfileImageInput({ size, onImageSelected }: Props) {
   const onChangeImage = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const imageUrl = await userUploadImage(file); //추가 이미지 업로드 api 호출
+      const imageUrl = await userUploadImage(file);
       const reader = new FileReader();
       reader.onload = (e: ProgressEvent<FileReader>) => {
         if (e.target?.result) {
-          setImageUrl(imageUrl); //이미지 url 상태에 저장
-          onImageSelected(imageUrl); //부모 컴포넌트에게 이미지 url 전달
+          setImageUrl(imageUrl);
+          onImageSelected(imageUrl);
         }
       };
       reader.readAsDataURL(file);
@@ -45,11 +49,20 @@ export default function ProfileImageInput({ size, onImageSelected }: Props) {
       />
       <button className={cn('imageBox', size)} onClick={onClickImageBox}>
         <div
-          className={cn({ iconImage: !imageUrl }, { uploadImage: imageUrl })}
+          className={cn(
+            { initialImageUrl: !imageUrl },
+            { uploadImage: imageUrl },
+          )}
         >
           <Image
             layout="fill"
-            src={imageUrl ? imageUrl : '/assets/icon/plusIcon.svg'}
+            src={
+              imageUrl
+                ? imageUrl
+                : initialImageUrl
+                  ? initialImageUrl
+                  : '/assets/icon/plusIcon.svg'
+            }
             alt={imageUrl ? '불러온 이미지' : '+ 아이콘'}
             priority={true}
             objectFit="cover"

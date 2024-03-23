@@ -40,7 +40,6 @@ export default function Dashboard() {
   return (
     <div className={styles['background']}>
       <HeaderMyDashboard boardTitle={dashboard.title} isDashboard={true} />
-
       <SideBar />
       <section className={styles['section']}>
         <CardSection dashboardId={id} />

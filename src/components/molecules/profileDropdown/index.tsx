@@ -3,11 +3,15 @@ import classNames from 'classnames/bind';
 import Link from 'next/link';
 import styles from './profileDropdown.module.scss';
 import { useRouter } from 'next/router';
-import { ProfileDownProps } from '@/@types/type';
+import { useContext } from 'react';
+import { userContext } from '@/pages/_app';
+import Image from 'next/image';
+import DefaultProfileImage from '@/components/atoms/defaultProfileImage';
 
 const cn = classNames.bind(styles);
 
-const ProfileDown = ({ onBlur }: ProfileDownProps) => {
+const ProfileDown = () => {
+  const { userInfo } = useContext(userContext);
   const router = useRouter();
   const handleLogout = () => {
     sessionStorage.removeItem('accessToken');
@@ -18,7 +22,7 @@ const ProfileDown = ({ onBlur }: ProfileDownProps) => {
   return (
     <div className={cn('nicknameMenu')} onBlur={onBlur}>
       <button className={cn('menuItem')}>
-        <Link href="/myPage">마이페이지</Link>
+        <Link href="/mypage">마이페이지</Link>
       </button>
       <hr />
       <button className={cn('menuItem', 'logout')} onClick={handleLogout}>
@@ -29,3 +33,4 @@ const ProfileDown = ({ onBlur }: ProfileDownProps) => {
 };
 
 export default ProfileDown;
+// onBlur?
