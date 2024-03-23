@@ -12,7 +12,6 @@
   cursor: default;
   padding-left: 24px;
   padding-right: 24px;
-  position: absolute;
 }
 
 .modalContent {
@@ -164,6 +163,33 @@
 .commentArea {
   margin-top: 20px;
 }
+.commentListArea {
+  max-height: 110px;
+  overflow-y: auto;
+  margin-top: 10px;
+  @media (min-width: 769px) {
+    max-height: 200px;
+  }
+}
+
+.commentListArea::-webkit-scrollbar {
+  width: 7px;
+}
+
+.commentListArea::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+.commentListArea::-webkit-scrollbar-thumb {
+  background-color: #a7d7d9;
+  border-radius: 5px;
+}
+
+.commentListArea::-webkit-scrollbar-thumb:hover {
+  background-color: #01b3c8;
+}
+
 .commentWriterArea {
   margin-top: 16px;
   display: flex;
