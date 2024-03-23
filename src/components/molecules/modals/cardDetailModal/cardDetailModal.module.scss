@@ -24,11 +24,28 @@
   // position: relative;
   // display: flex;
   // flex-direction: column;
+  @media (min-width: 769px) {
+    width: 680px;
+    height: 770px;
+    padding: 14px 28px;
+  }
 }
+
+.topArea {
+  @media (min-width: 769px) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 .menuArea {
   display: flex;
   justify-content: flex-end;
   gap: 16px;
+  @media (min-width: 769px) {
+    order: 2;
+    align-items: center;
+  }
 }
 
 .kebabIcon {
@@ -42,6 +59,16 @@
 }
 .title {
   font-size: 2rem;
+  @media (min-width: 769px) {
+    order: 1;
+  }
+}
+
+.mainArea {
+  @media (min-width: 769px) {
+    display: flex;
+    gap: 24px;
+  }
 }
 
 .infoArea {
@@ -53,6 +80,17 @@
   border-radius: 8px;
   gap: 60px;
   padding: 0px 60px 12px 16px;
+
+  @media (min-width: 769px) {
+    order: 2;
+    width: 180px;
+    height: 155px;
+    flex-direction: column;
+    gap: 0;
+    justify-content: flex-start;
+    padding: 16px;
+    margin-top: 15px;
+  }
 }
 
 .userInfoArea,
@@ -72,6 +110,9 @@
 .dateArea {
   display: flex;
   flex-direction: column;
+  @media (min-width: 769px) {
+    margin-top: 20px;
+  }
 }
 
 .date {
@@ -81,6 +122,13 @@
 //   font-size: 1.2rem;
 //   color: var(--black20);
 // }
+
+.contentArea {
+  @media (min-width: 769px) {
+    order: 1;
+    width: 420px;
+  }
+}
 
 .infoTitle {
   font-size: 1rem;

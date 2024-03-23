@@ -2,7 +2,7 @@
 .textareaContainer {
   border: 1px solid var(--gray30);
   border-radius: 6px;
-  height: 100px;
+  height: 60px;
   padding: 12px 16px;
   padding-bottom: 36px;
   color: var(--black);
@@ -17,7 +17,7 @@
 
   @media (min-width: 769px) {
     font-size: 1.4rem;
-    height: 139px;
+    height: 100px;
   }
 }
 
