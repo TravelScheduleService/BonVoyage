@@ -31,7 +31,7 @@ export default function CreateColumnModal({
       const res = await instance.post('/columns', columnData, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
         },
       });
       console.log('Column added successfully:', res.data);

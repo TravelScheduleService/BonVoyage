@@ -29,7 +29,7 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
         {
           headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
           },
         },
       );

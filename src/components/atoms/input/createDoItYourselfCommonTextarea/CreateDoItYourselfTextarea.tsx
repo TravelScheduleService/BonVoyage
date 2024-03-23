@@ -42,7 +42,7 @@ export default function CreateDoItYourselfTextarea({
       const res = await instance.post('/comments', commentData, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
         },
       });
       console.log('Comment added successfully:', res.data);

@@ -111,7 +111,7 @@ export default function CardDetailModal({
         {
           headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
           },
         },
       );
@@ -127,7 +127,7 @@ export default function CardDetailModal({
       await instance.delete(`/comments/${commentId}`, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
         },
       });
       getCommentList();
