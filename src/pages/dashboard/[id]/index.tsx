@@ -16,7 +16,7 @@ export default function Dashboard() {
   const router = useRouter();
   const { id } = router.query;
 
-  async function getDashboard( targetId : string) {
+  async function getDashboard(targetId: string) {
     const res = await axios.get(`/dashboards/${targetId}`);
     const nextDashboard = res.data;
     setDashboard(nextDashboard);
@@ -35,15 +35,11 @@ export default function Dashboard() {
     getDashboard(id);
   }, [id]);
 
-
   if (!dashboard) return null;
 
   return (
     <div className={styles['background']}>
-      <HeaderMyDashboard
-        boardTitle={dashboard.title}
-        isDashboard={true}
-      />
+      <HeaderMyDashboard boardTitle={dashboard.title} isDashboard={true} />
       <SideBar />
       <section className={styles['section']}>
         <CardSection dashboardId={id} />

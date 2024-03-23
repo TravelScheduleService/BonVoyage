@@ -1,4 +1,5 @@
 import { ProfileDownProps } from '@/@types/type';
+import useAuth from '@/hooks/useAuth';
 import classNames from 'classnames/bind';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
@@ -8,6 +9,7 @@ import styles from './profileDropdown.module.scss';
 const cn = classNames.bind(styles);
 
 const ProfileDown = ({ onBlur }: ProfileDownProps) => {
+  const { userInfo } = useAuth();
   const router = useRouter();
   const handleLogout = async () => {
     sessionStorage.removeItem('accessToken');
@@ -18,7 +20,7 @@ const ProfileDown = ({ onBlur }: ProfileDownProps) => {
   return (
     <div className={cn('nicknameMenu')} onBlur={onBlur}>
       <button className={cn('menuItem')}>
-        <Link href="/myPage">마이페이지</Link>
+        <Link href="/mypage">마이페이지</Link>
       </button>
       <hr />
       <button className={cn('menuItem', 'logout')} onClick={handleLogout}>

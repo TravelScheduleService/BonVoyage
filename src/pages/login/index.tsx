@@ -129,7 +129,12 @@ export default function Login() {
       >
         <EmailInput errors={errors} register={register} />
         <PasswordInput errors={errors} register={register} />
-        <Button name="로그인" type="account" disabled={!isValid} />
+        <Button
+          buttonProps={{ type: 'submit' }}
+          disabled={!isValid}
+          name="로그인"
+          type="account"
+        />
         {errors.root && (
           <div className={styles.errorMessage}>{errors.root.message}</div>
         )}
