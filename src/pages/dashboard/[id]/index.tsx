@@ -11,6 +11,7 @@ import { Column } from '@/@types/type';
 import instance from '@/api/axios';
 import { compileString } from 'sass';
 
+
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dashboard, setDashboard] = useState();
@@ -20,7 +21,9 @@ export default function Dashboard() {
   const { id } = router.query;
 
   async function getDashboard(targetId: string) {
+
     const res = await instance.get(`/dashboards/${targetId}`);
+
     const nextDashboard = res.data;
     setDashboard(nextDashboard);
   }

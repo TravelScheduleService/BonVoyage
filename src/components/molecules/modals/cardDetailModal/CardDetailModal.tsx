@@ -287,6 +287,7 @@ export default function CardDetailModal({
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         </div>
