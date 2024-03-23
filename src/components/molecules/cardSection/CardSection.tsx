@@ -1,32 +1,13 @@
-import ChipNumber from '@/components/atoms/chipNumber/ChipNumber';
-import ColorDot from '@/components/atoms/colorDot/ColorDot';
 import styles from './cardSection.module.scss';
-import Image from 'next/image';
-import settingIcon from '../../../../public/assets/icon/settingsIcon.svg';
-import EventDashboardBtn from '@/components/atoms/buttons/eventDashboardBtn';
-import Card from '../card/Card';
 import React, { useEffect, useState } from 'react';
-import CardDetailModal from '../modals/cardDetailModal/CardDetailModal';
 import CreateCardModal from '../modals/createCardModal/CreateCardModal';
 import EditColumnModal from '../modals/editColumnModal/EditColumnModal';
 import instance from '@/api/axios';
-import { Column } from '@/@types/type';
-import { CardsProvider } from '@/components/context/CardsContext';
-import { cardsAtom } from '@/components/atoms/atoms';
+
+import Column from '@/components/atoms/column/Column';
 
 interface CardSectionProps {
   dashboardId: number;
-}
-
-interface Card {
-  id: number;
-  title: string;
-  imageUrl: string;
-  tags: string[];
-  createdAt: string;
-  assignee: {
-    profileImageUrl: string;
-  };
 }
 
 export default function CardSection({ dashboardId }: CardSectionProps) {
@@ -34,11 +15,6 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
   const [isEditColumnModalOpen, setIsEditColumnModalOpen] = useState(false);
   const [columns, setColumns] = useState<Column[]>([]);
   const [selectedColumn, setSelectedColumn] = useState<Column | null>(null);
-  const [cards, setCards] = useState<Card[]>([]);
-
-  const handleCardsData = (cardsData) => {
-    setCards(cardsData);
-  };
 
   async function getColumns() {
     try {
@@ -78,35 +54,13 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
   }, [dashboardId]);
 
   return (
-    // <CardsProvider>
     <div className={styles['cardSection']}>
       {columns?.map((column) => (
-        <div key={column.id} className={styles['column']}>
-          <div className={styles['defaultArea']}>
-            <div className={styles['titleArea']}>
-              <ColorDot colorName="blue"></ColorDot>
-              <h1 className={styles['title']}>{column.title}</h1>
-              {/* <ChipNumber number="0"></ChipNumber> */}
-              <ChipNumber number={cards.length}></ChipNumber>
-            </div>
-            <Image
-              onClick={() => handleSettingButtonClick(column)}
-              className={styles['settingIcon']}
-              src={settingIcon}
-              alt="Setting Icon"
-            />
-          </div>
-          <EventDashboardBtn
-            type="addTodo"
-            onClick={() => handleAddCardButtonClick(column)}
-          />
-          <Card
-            columnId={column.id}
-            columnTitle={column.title}
-            handleCardsData={handleCardsData}
-            cards={cards}
-          />
-        </div>
+        <Column
+          column={column}
+          handleSettingButtonClick={handleSettingButtonClick}
+          handleAddCardButtonClick={handleAddCardButtonClick}
+        ></Column>
       ))}
       {isCreateCardModalOpen && (
         <CreateCardModal column={selectedColumn!} onClose={closeModal} />
@@ -120,6 +74,5 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
         />
       )}
     </div>
-    // </CardsProvider>
   );
 }
