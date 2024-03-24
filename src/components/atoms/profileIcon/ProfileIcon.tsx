@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styles from './profileIcon.module.scss';
 
 type props = {
-  name?: string;
+  name: string;
   profile?: string;
 };
 
@@ -14,7 +14,7 @@ export default function ProfileIcon({ name, profile }: props) {
       {profile ? (
         <div className={styles['image']}>
           <Image
-            layout="fill"
+            // layout="fill"
             src={profile}
             alt="프로필 이미지"
             priority={true}

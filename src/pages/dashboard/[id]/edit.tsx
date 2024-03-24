@@ -12,6 +12,7 @@ import EventDashboardBtn from '@/components/atoms/buttons/eventDashboardBtn';
 
 export default function editdashboard() {
   const router = useRouter();
+  const { id } = router.query;
   const goBack = () => {
     router.back();
   };
@@ -25,8 +26,8 @@ export default function editdashboard() {
           돌아가기
         </button>
         <EditDashboardTitle />
-        <Members />
-        <InviteList />
+        <Members dashboardId={id} />
+        <InviteList dashboardId={id} />
         <EventDashboardBtn name="대시보드 삭제하기" type="deleteDashboard" />
       </div>
     </div>

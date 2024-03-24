@@ -5,7 +5,7 @@ import CreateDoItYourselfInput from '../createDoItYourselfCommonInput/CreateDoIt
 const CreateDoItYourselfTitle = forwardRef<
   HTMLInputElement,
   Partial<CreateDoItYourselfProps>
->(function (props, ref, value, onChange) {
+>(function ({ onChange, value, ...props }, ref) {
   return (
     <CreateDoItYourselfInput
       title="제목"

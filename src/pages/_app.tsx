@@ -11,7 +11,6 @@ export const userContext = React.createContext<UserContextProps>({
     id: 0,
     email: '',
     nickname: '',
-    profileImageUrl: '',
     createdAt: '',
     updatedAt: '',
   },

@@ -1,6 +1,6 @@
 import { CreateDoItYourselfProps } from '@/@types/type';
 import classNames from 'classnames/bind';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import Image from 'next/image';
 import { SyntheticEvent, forwardRef, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
@@ -9,12 +9,18 @@ import CreateDoItYourselfInput from '../createDoItYourselfCommonInput/CreateDoIt
 import styles from './createDoItYourselfDate.module.scss';
 
 const cn = classNames.bind(styles);
+const dateFormat = 'yyyy-MM-dd HH:mm';
+
 const CreateDoItYourselfDate = forwardRef<
   HTMLInputElement,
   Partial<CreateDoItYourselfProps>
 >(function (props, ref) {
   const input = useRef<HTMLInputElement>();
-  const [selectedDate, setSelectedDate] = useState<Date>();
+  const { defaultValue } = props;
+  const defaultDate = defaultValue
+    ? parse(defaultValue as string, dateFormat, new Date())
+    : null;
+  const [selectedDate, setSelectedDate] = useState<Date | null>(defaultDate);
 
   const calendarIcon = (
     <Image
@@ -50,12 +56,11 @@ const CreateDoItYourselfDate = forwardRef<
           ) => {
             setSelectedDate(date);
             const current = input.current as HTMLInputElement;
-            current.value = format(date, 'yyyy-MM-dd HH:mm');
-            console.log({ current, event, value: current.value });
+            current.value = format(date, dateFormat);
             (props.onChange as ChangeHandler)?.({ target: current });
           }}
           showTimeSelect
-          dateFormat="yyyy-MM-dd HH:mm"
+          dateFormat={dateFormat}
           timeFormat="HH:mm"
           timeIntervals={30}
           timeCaption="time"

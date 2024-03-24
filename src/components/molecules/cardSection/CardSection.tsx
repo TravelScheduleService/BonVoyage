@@ -1,20 +1,12 @@
-import styles from './cardSection.module.scss';
-import React, { useState } from 'react';
+import { Column } from '@/@types/type';
+import ColumnComponent from '@/components/atoms/column/ColumnComponent';
+import { useState } from 'react';
 import CreateCardModal from '../modals/createCardModal/CreateCardModal';
 import EditColumnModal from '../modals/editColumnModal/EditColumnModal';
-import Column from '@/components/atoms/column/Column';
-
-interface Column {
-  id: number;
-  title?: string;
-  teamId: string;
-  dashboardId: number;
-  createdAt?: string;
-  updatedAt?: string;
-}
+import styles from './cardSection.module.scss';
 
 interface CardSectionProps {
-  columns: [];
+  columns: Column[];
   getColumns: () => void;
 }
 
@@ -42,11 +34,12 @@ export default function CardSection({ columns, getColumns }: CardSectionProps) {
   return (
     <div className={styles['cardSection']}>
       {columns?.map((column) => (
-        <Column
+        <ColumnComponent
+          key={column.id}
           column={column}
           handleSettingButtonClick={handleSettingButtonClick}
           handleAddCardButtonClick={handleAddCardButtonClick}
-        ></Column>
+        />
       ))}
       {isCreateCardModalOpen && (
         <CreateCardModal column={selectedColumn!} onClose={closeModal} />

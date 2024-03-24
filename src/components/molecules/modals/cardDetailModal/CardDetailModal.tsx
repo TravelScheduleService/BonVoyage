@@ -1,32 +1,19 @@
-import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
-import styles from './cardDetailModal.module.scss';
-import ChipProgress from '../../ChipProgress/ChipProgress';
-import CreateDoItYourselfComment from '@/components/atoms/input/commentInput/CreateDoItYourselfComment';
-import ChipTagWithoutX from '@/components/atoms/chipTag/ChipTagWithoutX';
-import CardDetailKebap from '../../cardDetailKebap/CardDetailKebap';
+import { CardDetail } from '@/@types/type';
 import instance from '@/api/axios';
+import ChipTagWithoutX from '@/components/atoms/chipTag/ChipTagWithoutX';
+import CreateDoItYourselfComment from '@/components/atoms/input/commentInput/CreateDoItYourselfComment';
 import { format } from 'date-fns';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import CardDetailKebap from '../../cardDetailKebap/CardDetailKebap';
+import ChipProgress from '../../chipProgress/ChipProgress';
+import styles from './cardDetailModal.module.scss';
 
 interface ModalProps {
   onClose: () => void;
-  cardId: number;
+  cardId?: number;
   columnTitle: string;
   getCards: () => void;
-}
-
-interface CardDetail {
-  title: string;
-  assignee?: {
-    profileImageUrl: string;
-    nickname: string;
-  };
-  dueDate: string;
-  tags: [];
-  description: string;
-  imageUrl: string;
-  columnId: number;
-  dashboardId: number;
 }
 
 interface Comment {
@@ -45,7 +32,7 @@ export default function CardDetailModal({
   columnTitle,
   getCards,
 }: ModalProps) {
-  const [cardDetail, setCardDetail] = useState<CardDetail | null>(null);
+  const [cardDetail, setCardDetail] = useState<CardDetail>();
   const [commentList, setCommentList] = useState<Comment[]>([]);
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editedCommentContent, setEditedCommentContent] = useState<string>('');
@@ -137,6 +124,10 @@ export default function CardDetailModal({
     }
   };
 
+  if (!cardDetail) {
+    return null;
+  }
+
   return (
     <div className={styles['cardDetailModal']}>
       <div className={styles['modalContent']}>
@@ -146,9 +137,10 @@ export default function CardDetailModal({
               cardId={cardId}
               getCards={getCards}
               cardData={cardDetail}
-            ></CardDetailKebap>
+            />
             <img
               className={styles['closeIcon']}
+              alt="close icon"
               src="/assets/icon/closeIcon.svg"
               onClick={onClose}
             />
@@ -184,7 +176,7 @@ export default function CardDetailModal({
           </div>
           <div className={styles['contentArea']}>
             <div className={styles['tagArea']}>
-              <ChipProgress column={columnTitle}></ChipProgress>
+              <ChipProgress column={columnTitle} />
               <div className={styles['line']}></div>
               <ChipTagWithoutX
                 tag={cardDetail?.tags.join(' ')}
@@ -193,13 +185,15 @@ export default function CardDetailModal({
             </div>
             <p className={styles['description']}>{cardDetail?.description}</p>
             <div className={styles['imageArea']}>
-              <Image
-                className={styles['image']}
-                src={cardDetail?.imageUrl}
-                width={280}
-                height={160}
-                alt="카드 이미지"
-              ></Image>
+              {cardDetail.imageUrl && (
+                <Image
+                  className={styles['image']}
+                  src={cardDetail?.imageUrl}
+                  width={300}
+                  height={200}
+                  alt="카드 이미지"
+                />
+              )}
             </div>
             <div className={styles['commentArea']}>
               <CreateDoItYourselfComment
@@ -210,13 +204,14 @@ export default function CardDetailModal({
               />
               <div className={styles['commentListArea']}>
                 {commentList.map((comment) => (
-                  <div key={comment.id}>
+                  <div className={styles['commentListArea']} key={comment.id}>
                     <div className={styles['commentWriterArea']}>
                       {comment.author.profileImageUrl ? (
                         <Image
                           className={styles['profileImage']}
                           width={26}
                           height={26}
+                          alt="Profile image"
                           src={comment.author.profileImageUrl}
                         />
                       ) : (
@@ -287,7 +282,6 @@ export default function CardDetailModal({
                   </div>
                 ))}
               </div>
-
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
-import { StaticImageData } from 'next/image';
 import {
+  ButtonHTMLAttributes,
   ChangeEventHandler,
   ForwardedRef,
   HTMLInputTypeAttribute,
@@ -19,19 +19,16 @@ export interface ButtonProps {
   nowPage?: number;
   totalPage?: number;
   icon?: ReactNode;
-  buttonProps?: InputHTMLAttributes<HTMLButtonElement>;
+  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 // 할 일 모달 Input props
-export interface CreateDoItYourselfProps {
+export interface CreateDoItYourselfProps
+  extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   content?: string;
-  className?: string;
-  value?: string;
   icon?: ReactNode;
-  name?: string;
   ref?: ForwardedRef<HTMLInputElement>;
-  required?: boolean;
   isVertical?: boolean;
   isSpecialInput?: boolean; // 특수한 input이 필요한 경우 사용
   type?: HTMLInputTypeAttribute | 'textarea';
@@ -41,6 +38,7 @@ export interface CreateDoItYourselfProps {
 
 // 담당자 드롭다운 멤버 프로필
 export interface MemberProfile {
+  id: number;
   nickname: string;
   profileImageUrl: string;
 }
@@ -134,6 +132,17 @@ export interface Card {
   imageUrl: string;
 }
 
+export interface CardDetail {
+  title: string;
+  assignee?: MemberProfile;
+  dueDate: string;
+  tags: string[];
+  description: string;
+  imageUrl: string;
+  columnId: number;
+  dashboardId: number;
+}
+
 export interface Member extends MemberProfile {
   teamId: string;
   page?: number;
@@ -143,7 +152,7 @@ export interface Member extends MemberProfile {
 
 export interface Column {
   id: number;
-  title?: string;
+  title: string;
   teamId: string;
   dashboardId: number;
   createdAt?: string;
@@ -160,7 +169,7 @@ export interface UserContextProps {
     id: number;
     email: string;
     nickname: string;
-    profileImageUrl: string;
+    profileImageUrl?: string;
     createdAt: string;
     updatedAt: string;
   };

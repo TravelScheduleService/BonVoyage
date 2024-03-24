@@ -6,7 +6,7 @@ import instance from '@/api/axios';
 interface ModalProps {
   onClose: () => void;
   getCards: () => void;
-  cardId: number;
+  cardId?: number;
 }
 
 export default function DeleteCardModal({

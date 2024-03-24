@@ -1,7 +1,6 @@
 import CreateDoItYourselfTextarea from '../createDoItYourselfCommonTextarea/CreateDoItYourselfTextarea';
 
 export default function CreateDoItYourselfComment(commentProp) {
-  console.log(commentProp);
   return (
     <CreateDoItYourselfTextarea
       title="댓글"

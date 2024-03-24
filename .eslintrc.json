@@ -1,3 +1,9 @@
 {
+  "plugins": ["react"],
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react/self-closing-comp": "warn"
+  },
   "extends": "next/core-web-vitals"
 }

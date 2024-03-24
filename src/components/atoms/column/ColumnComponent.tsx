@@ -1,19 +1,17 @@
+import { Column } from '@/@types/type';
 import Card from '@/components/molecules/card/Card';
 import Image from 'next/image';
+import { useState } from 'react';
+import settingIcon from '../../../../public/assets/icon/settingsIcon.svg';
 import EventDashboardBtn from '../buttons/eventDashboardBtn';
 import ChipNumber from '../chipNumber/ChipNumber';
 import ColorDot from '../colorDot/ColorDot';
-import settingIcon from '../../../../public/assets/icon/settingsIcon.svg';
 import styles from './column.module.scss';
-import { useState } from 'react';
 
 interface ColumnProps {
-  column: {
-    id: number;
-    title: string;
-  };
-  handleSettingButtonClick: (column: { id: number; title: string }) => void;
-  handleAddCardButtonClick: (column: { id: number; title: string }) => void;
+  column: Column;
+  handleSettingButtonClick: (column: Column) => void;
+  handleAddCardButtonClick: (column: Column) => void;
 }
 
 interface Card {
@@ -27,7 +25,7 @@ interface Card {
   };
 }
 
-export default function Column({
+export default function ColumnComponent({
   column,
   handleSettingButtonClick,
   handleAddCardButtonClick,

@@ -20,17 +20,30 @@ const ProfileDown = () => {
   };
 
   return (
-    <div className={cn('nicknameMenu')} onBlur={onBlur}>
-      <button className={cn('menuItem')}>
-        <Link href="/mypage">마이페이지</Link>
-      </button>
-      <hr />
-      <button className={cn('menuItem', 'logout')} onClick={handleLogout}>
-        로그아웃
-      </button>
+    <div className={cn('nicknameMenu')}>
+      {userInfo.profileImageUrl ? (
+        <Image
+          src={userInfo.profileImageUrl}
+          alt="userImage"
+          width={80}
+          height={80}
+          className={cn('profileImage')}
+        />
+      ) : (
+        <DefaultProfileImage/>
+      )}
+      <span>{userInfo.nickname}</span>
+      <span>{userInfo.email}</span>
+      <div className={cn('btnContainer')}>
+        <Link href="/myPage">
+          <button className={cn('menuItem')}>MyPage</button>
+        </Link>
+        <button className={cn('menuItem', 'logout')} onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
 
 export default ProfileDown;
-// onBlur?

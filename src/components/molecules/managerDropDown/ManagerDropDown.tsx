@@ -1,35 +1,67 @@
-import { ChangeEvent, useState } from 'react';
-import styles from './managerDropDown.module.scss';
+import { Member, MemberProfile } from '@/@types/type';
+import { getMemberList } from '@/api/members/memberApi';
+import { useDashboardState } from '@/hooks/contexts';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { MemberProfile } from '@/@types/type';
+import {
+  ChangeEvent,
+  Dispatch,
+  HTMLAttributes,
+  useEffect,
+  useState,
+} from 'react';
 import defaultImage from '../../../../public/assets/image/testProfile.png';
+import styles from './managerDropDown.module.scss';
 
 const cn = classNames.bind(styles);
 
 interface Props {
-  members: MemberProfile[];
+  defaultValue?: MemberProfile;
+  inputProps?: HTMLAttributes<HTMLInputElement>;
+  onChange?: Dispatch<MemberProfile>;
 }
 
-export default function ManagerDropDown({ members }: Props) {
-  const [manager, setManager] = useState<MemberProfile | null>(null);
+export default function ManagerDropDown({
+  defaultValue,
+  inputProps = {},
+  onChange,
+}: Props) {
+  console.log({ defaultValue });
+  const [dashboard] = useDashboardState();
+  const [members, setMembers] = useState<Member[]>([]);
+  const [manager, setManager] = useState<MemberProfile | undefined>(
+    defaultValue,
+  );
   const [inputValue, setInputValue] = useState('');
   const [isOpenMemberList, setIsOpenMemberList] = useState(false);
-  const [selectedManagerId, setSelectedManagerId] = useState<string | null>(
-    null,
-  );
-
+  const [selectedManagerId, setSelectedManagerId] = useState<
+    number | undefined
+  >(defaultValue?.id);
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     setIsOpenMemberList(true);
   };
 
   const onClickItem = (element: MemberProfile) => {
+    onChange?.(element);
     setManager(element);
     setSelectedManagerId(element.id);
     setInputValue('');
     setIsOpenMemberList(false);
   };
+
+  async function fetchMembers() {
+    try {
+      const memberData = await getMemberList(dashboard?.id as number); // 멤버 목록 가져오기
+      setMembers(memberData.members); // Fix: Pass memberData as an array
+    } catch (error) {
+      console.error('Error fetching members:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchMembers();
+  }, []); // 컴포넌트가 마운트될 때만 실행
 
   return (
     <div className={cn('container')}>
@@ -41,6 +73,7 @@ export default function ManagerDropDown({ members }: Props) {
             value={inputValue}
             onChange={onChangeInput}
             onFocus={() => setIsOpenMemberList(true)}
+            {...inputProps}
           />
 
           {manager && !inputValue ? (
@@ -82,17 +115,8 @@ export default function ManagerDropDown({ members }: Props) {
                   ? element.nickname.includes(inputValue)
                   : true;
               })
-              // .map((element) => {
-              //   let check = false;
-              //   if (members?.nickname === element.nickname) {
-              //     check = true;
-              //   }
               .map((element) => {
-                let check = false;
-                if (selectedManagerId === element.id) {
-                  // 선택된 담당자인 경우 check 변수를 true로 설정
-                  check = true;
-                }
+                let check = selectedManagerId === element.id;
 
                 return (
                   <div

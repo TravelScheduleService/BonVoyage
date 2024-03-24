@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 const cn = classNames.bind(styles);
 
 interface Props {
-  tag: string;
+  tag?: string;
   color: string;
   onClick?: () => void;
 }

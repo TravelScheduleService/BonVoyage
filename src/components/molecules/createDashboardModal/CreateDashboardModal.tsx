@@ -5,18 +5,9 @@ import { ChangeEvent, useState } from 'react';
 import CheckIcon from '@/components/icon/CheckIcon';
 import { CreateDashboard } from '@/@types/type';
 import ColorPalette from '../colorPalette/ColorPalette';
+import { COLOR_LIST, COLOR_NAMES } from '@/styles/colorList';
 
 const cn = classNames.bind(styles);
-
-const COLOR_LIST: { [value: string]: string } = {
-  green: '#7AC555',
-  orange: '#FFA500',
-  pink: '#E876EA',
-  purple: '#760DDE',
-  blue: '#76A5EA',
-};
-
-const COLOR_NAMES = ['green', 'purple', 'orange', 'pink', 'blue'];
 
 interface Props {
   onClickAccept: (value: CreateDashboard) => void;
