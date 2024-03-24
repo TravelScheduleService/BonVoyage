@@ -10,8 +10,6 @@ import LandingHeader from '@/components/molecules/landing/landingHeader';
 import LandingMain from '@/components/molecules/landing/landingMain';
 import styles from '@/styles/Home.module.scss';
 import { getSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 export async function getServerSideProps(ctx: any) {
   const session = await getSession(ctx);
@@ -19,15 +17,6 @@ export async function getServerSideProps(ctx: any) {
 }
 
 const Index = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('accessToken');
-    if (token) {
-      router.push('/mydashboard');
-    }
-  }, []);
-
   const CarouselImages = [back1, back2, back3, back4, back5];
 
   return (

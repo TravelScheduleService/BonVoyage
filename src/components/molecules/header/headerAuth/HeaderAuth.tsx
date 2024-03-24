@@ -1,10 +1,18 @@
 import LogoWithTitle from '@/components/atoms/logoWithTitle/LogoWithTitle';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import styles from './headerAuth.module.scss';
 
 export default function HeaderAuth() {
-  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('accessToken');
+    if (token) {
+      router.push('/mydashboard');
+    }
+  }, []);
   return (
     <>
       <div className={styles['header']}>
