@@ -28,6 +28,7 @@ export default function Card({
   columnId,
   columnTitle,
   handleCardsData,
+  columns,
 }: CardProps) {
   const [cards, setCards] = useState<Card[]>([]);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
@@ -121,6 +122,7 @@ export default function Card({
           cardId={clickedCardId}
           columnTitle={columnTitle}
           getCards={getCards}
+          columns={columns}
         />
       )}
     </div>

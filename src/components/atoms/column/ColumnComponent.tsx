@@ -27,6 +27,7 @@ interface Card {
 
 export default function ColumnComponent({
   column,
+  columns,
   handleSettingButtonClick,
   handleAddCardButtonClick,
 }: ColumnProps) {
@@ -60,6 +61,7 @@ export default function ColumnComponent({
           columnId={column.id}
           columnTitle={column.title}
           handleCardsData={handleCardsData}
+          columns={columns}
         />
       </div>
     </>

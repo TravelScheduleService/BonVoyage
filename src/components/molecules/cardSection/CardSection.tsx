@@ -37,6 +37,7 @@ export default function CardSection({ columns, getColumns }: CardSectionProps) {
         <ColumnComponent
           key={column.id}
           column={column}
+          columns={columns}
           handleSettingButtonClick={handleSettingButtonClick}
           handleAddCardButtonClick={handleAddCardButtonClick}
         />

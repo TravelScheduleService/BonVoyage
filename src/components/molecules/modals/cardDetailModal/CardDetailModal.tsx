@@ -29,6 +29,7 @@ interface Comment {
 export default function CardDetailModal({
   onClose,
   cardId,
+  columns,
   columnTitle,
   getCards,
 }: ModalProps) {
@@ -137,6 +138,8 @@ export default function CardDetailModal({
               cardId={cardId}
               getCards={getCards}
               cardData={cardDetail}
+              columns={columns}
+              columnTitle={columnTitle}
             />
             <img
               className={styles['closeIcon']}

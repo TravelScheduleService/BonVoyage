@@ -7,15 +7,23 @@ import ChipProgress from '../ChipProgress/ChipProgress';
 const cn = classNames.bind(styles);
 
 interface Props {
-  items: string[];
+  items: Item[];
+  title: string;
+  columnTitle: string;
 }
-export default function StatusDropDown({ items }: Props) {
-  const [nowItem, setNowItem] = useState(items[0]);
+
+interface Item {
+  id: number;
+  title: string;
+}
+
+export default function StatusDropDown({ items, title, columnTitle }: Props) {
+  const [nowItem, setNowItem] = useState([columnTitle]);
   const [itemList] = useState(items);
   const [isOpenItemList, setIsOpenItemList] = useState(false);
 
   const onClickItem = (element: string) => {
-    setNowItem(element);
+    setNowItem(element.title);
     setIsOpenItemList(false);
   };
 
@@ -59,7 +67,7 @@ export default function StatusDropDown({ items }: Props) {
                     )}
                   </div>
                   <div>
-                    <ChipProgress column={element} />
+                    <ChipProgress column={element.title} />
                   </div>
                 </div>
               );

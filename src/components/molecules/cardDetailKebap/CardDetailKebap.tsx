@@ -10,7 +10,13 @@ interface ModalProps {
   cardData?: CardDetail;
 }
 
-const CardDetailKebap = ({ cardId, getCards, cardData }: ModalProps) => {
+const CardDetailKebap = ({
+  cardId,
+  getCards,
+  cardData,
+  columns,
+  columnTitle,
+}: ModalProps) => {
   const [view, setView] = useState(false);
 
   const handleView = () => {
@@ -30,7 +36,13 @@ const CardDetailKebap = ({ cardId, getCards, cardData }: ModalProps) => {
         src="/assets/icon/kebabMenuIcon.svg"
       />
       {view && (
-        <KebapMenu cardId={cardId} getCards={getCards} cardData={cardData} />
+        <KebapMenu
+          cardId={cardId}
+          getCards={getCards}
+          cardData={cardData}
+          columns={columns}
+          columnTitle={columnTitle}
+        />
       )}
     </div>
   );

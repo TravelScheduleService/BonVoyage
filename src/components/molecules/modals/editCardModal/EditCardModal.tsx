@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import ImageInput from '../../imageInput/ImageInput';
 import CreateDoItYourselfTag from '../../input/CreateDoItYourselfTag';
 import ManagerDropDown from '../../managerDropDown/ManagerDropDown';
+import StatusDropDown from '../../statusDropDown/StatusDropDown';
 import styles from './editCardModal.module.scss';
 
 interface ModalProps {
@@ -17,7 +18,12 @@ interface ModalProps {
   // selectedManager: MemberProfile | null;
 }
 
-export default function EditCardModal({ onClose, cardData }: ModalProps) {
+export default function EditCardModal({
+  onClose,
+  cardData,
+  columns,
+  columnTitle,
+}: ModalProps) {
   const { handleSubmit, register, setValue } = useForm<Card>({
     defaultValues: cardData,
     mode: 'all',
@@ -45,7 +51,7 @@ export default function EditCardModal({ onClose, cardData }: ModalProps) {
         onSubmit={handleSubmit(onSubmit)}
       >
         <h1 className={styles['modalTitle']}>여행 계획 수정</h1>
-        {/* <StatusDropDown items={[]} /> */}
+        <StatusDropDown items={columns} columnTitle={columnTitle} />
         <ManagerDropDown
           defaultValue={cardData.assignee}
           onChange={(assignee) => setValue('assigneeUserId', assignee.userId)}
