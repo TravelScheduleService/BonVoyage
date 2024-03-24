@@ -4,6 +4,7 @@ import { Dispatch, useCallback, useState } from 'react';
 import styles from './createDoItYourselfTag.module.scss';
 
 interface Props {
+  defaultTags?: string[];
   onChangeTags: Dispatch<string[]>;
 }
 
@@ -14,9 +15,12 @@ const colors: Array<'orange' | 'pink' | 'blue' | 'green'> = [
   'blue',
 ];
 
-export default function CreateDoItYourselfTag({ onChangeTags }: Props) {
-  const [tags, setTagsState] = useState<string[]>([]); // 입력된 태그들을 저장하는 상태
-  const [hasTags, setHasTags] = useState<boolean>(false); // 입력된 태그 여부를 저장하는 상태
+export default function CreateDoItYourselfTag({
+  defaultTags = [],
+  onChangeTags,
+}: Props) {
+  const [tags, setTagsState] = useState<string[]>(defaultTags); // 입력된 태그들을 저장하는 상태
+  const [hasTags, setHasTags] = useState<boolean>(defaultTags.length > 0); // 입력된 태그 여부를 저장하는 상태
 
   const setTags = useCallback(
     function (action: (prevState: string[]) => string[]) {

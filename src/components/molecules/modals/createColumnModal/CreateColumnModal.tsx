@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import styles from './createColumnModal.module.scss';
-
 import Button from '@/components/atoms/buttons/button';
 import ColumnNameInput from '@/components/atoms/input/columnNameInput/ColumnNameInput';
 import instance from '@/api/axios';
 
 interface ModalProps {
   onClose: () => void;
+  getColumns: () => void;
   dashboardId: number;
-  setColumns: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 export default function CreateColumnModal({
   onClose,
   dashboardId,
-  setColumns,
+  getColumns,
 }: ModalProps) {
   const [columnName, setColumnName] = useState('');
 
@@ -36,7 +35,7 @@ export default function CreateColumnModal({
       });
       console.log('Column added successfully:', res.data);
       onClose();
-      window.location.reload();
+      getColumns();
     } catch (error) {
       console.error('Error adding column:', error);
     }
@@ -54,7 +53,7 @@ export default function CreateColumnModal({
             type="modal"
             color="white"
             onClick={onClose}
-          ></Button>
+          />
           <Button
             name="생성"
             type="modal"

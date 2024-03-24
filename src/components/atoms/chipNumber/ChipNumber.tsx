@@ -1,7 +1,7 @@
 import styles from './ChipNumber.module.scss';
 
 interface Props {
-  number: string;
+  number: number | string;
 }
 
 export default function ChipNumber({ number }: Props) {

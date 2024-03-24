@@ -3,13 +3,17 @@ import { ChangeEvent, MutableRefObject, useRef, useState } from 'react';
 import styles from './imageInput.module.scss';
 
 interface Props {
+  defaultValue: string;
   imageRef: MutableRefObject<File | undefined>;
   setImageFile?: (file: File) => void;
 }
 
-export default function ImageInput({ imageRef, setImageFile }: Props) {
-  const [imageUrl, setImageUrl] = useState('');
-  // const [imageFile, setImageFile] = useState<File | null>(null);
+export default function ImageInput({
+  defaultValue,
+  imageRef,
+  setImageFile,
+}: Props) {
+  const [imageUrl, setImageUrl] = useState(defaultValue);
   const imageInput = useRef<HTMLInputElement>(null);
 
   const onClickImageBox = () => {
@@ -49,18 +53,14 @@ export default function ImageInput({ imageRef, setImageFile }: Props) {
         <div className={styles['image']}>
           <Image
             layout="fill"
-            src={imageUrl ? imageUrl : '/assets/icon/plusIcon.svg'}
+            src={imageUrl || '/assets/icon/plusIcon.svg'}
             alt="+ 아이콘"
           />
         </div>
         {imageUrl && (
           <div className={styles['hoverImageBox']}>
             <div className={styles['hoverImage']}>
-              <Image
-                layout="fill"
-                src="/assets/icon/editIcon.svg"
-                alt="연필 아이콘"
-              />
+              <Image layout="fill" src="/assets/icon/editIcon.svg" alt="수정" />
             </div>
           </div>
         )}

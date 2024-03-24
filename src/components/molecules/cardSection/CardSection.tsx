@@ -1,37 +1,19 @@
-import styles from './cardSection.module.scss';
-import React, { useEffect, useState } from 'react';
+import { Column } from '@/@types/type';
+import ColumnComponent from '@/components/atoms/column/ColumnComponent';
+import { useState } from 'react';
 import CreateCardModal from '../modals/createCardModal/CreateCardModal';
 import EditColumnModal from '../modals/editColumnModal/EditColumnModal';
-import instance from '@/api/axios';
-
-import Column from '@/components/atoms/column/Column';
+import styles from './cardSection.module.scss';
 
 interface CardSectionProps {
-  dashboardId: number;
+  columns: Column[];
+  getColumns: () => void;
 }
 
-export default function CardSection({ dashboardId }: CardSectionProps) {
+export default function CardSection({ columns, getColumns }: CardSectionProps) {
   const [isCreateCardModalOpen, setIsCreateCardModalOpen] = useState(false);
   const [isEditColumnModalOpen, setIsEditColumnModalOpen] = useState(false);
-  const [columns, setColumns] = useState<Column[]>([]);
   const [selectedColumn, setSelectedColumn] = useState<Column | null>(null);
-
-  async function getColumns() {
-    try {
-      const res = await instance.get<{ data: Column[] }>(
-        `/columns?dashboardId=${dashboardId}`,
-        {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
-          },
-        },
-      );
-      setColumns(res.data.data);
-    } catch (error) {
-      console.error('Error fetching columns:', error);
-    }
-  }
 
   const handleAddCardButtonClick = (column: Column) => {
     setSelectedColumn(column);
@@ -49,18 +31,15 @@ export default function CardSection({ dashboardId }: CardSectionProps) {
     setIsEditColumnModalOpen(false);
   };
 
-  useEffect(() => {
-    getColumns();
-  }, [dashboardId]);
-
   return (
     <div className={styles['cardSection']}>
       {columns?.map((column) => (
-        <Column
+        <ColumnComponent
+          key={column.id}
           column={column}
           handleSettingButtonClick={handleSettingButtonClick}
           handleAddCardButtonClick={handleAddCardButtonClick}
-        ></Column>
+        />
       ))}
       {isCreateCardModalOpen && (
         <CreateCardModal column={selectedColumn!} onClose={closeModal} />

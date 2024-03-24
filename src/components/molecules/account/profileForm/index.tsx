@@ -47,12 +47,6 @@ const ProfileForm = () => {
     }
   };
 
-  const watchFiled = watch(['nickname'], {
-    nickname: '',
-  });
-
-  const isButtonDisabled = !profileImage && !watchFiled[0];
-
   const closeModal = () => {
     setModal({ isModalOpen: false, modalMessage: '' });
   };

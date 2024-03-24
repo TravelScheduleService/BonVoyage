@@ -1,16 +1,16 @@
 import { ProfileDownProps } from '@/@types/type';
+import DefaultProfileImage from '@/components/atoms/defaultProfileImage';
 import useAuth from '@/hooks/useAuth';
 import classNames from 'classnames/bind';
 import { signOut } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styles from './profileDropdown.module.scss';
 
 const cn = classNames.bind(styles);
 
 const ProfileDown = ({ onBlur }: ProfileDownProps) => {
   const { userInfo } = useAuth();
-  const router = useRouter();
   const handleLogout = async () => {
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('user');
@@ -19,13 +19,27 @@ const ProfileDown = ({ onBlur }: ProfileDownProps) => {
 
   return (
     <div className={cn('nicknameMenu')} onBlur={onBlur}>
-      <button className={cn('menuItem')}>
-        <Link href="/mypage">마이페이지</Link>
-      </button>
-      <hr />
-      <button className={cn('menuItem', 'logout')} onClick={handleLogout}>
-        로그아웃
-      </button>
+      {userInfo.profileImageUrl ? (
+        <Image
+          src={userInfo.profileImageUrl}
+          alt="userImage"
+          width={80}
+          height={80}
+          className={cn('profileImage')}
+        />
+      ) : (
+        <DefaultProfileImage />
+      )}
+      <span>{userInfo.nickname}</span>
+      <span>{userInfo.email}</span>
+      <div className={cn('btnContainer')}>
+        <Link href="/myPage">
+          <button className={cn('menuItem')}>MyPage</button>
+        </Link>
+        <button className={cn('menuItem', 'logout')} onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

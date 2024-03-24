@@ -1,10 +1,13 @@
+import { CardDetail } from '@/@types/type';
 import KebapMenu from '@/components/atoms/kebapMenu/KebapMenu';
+import Image from 'next/image';
 import { useState } from 'react';
 import styles from './cardDetailKebap.module.scss';
 
 interface ModalProps {
   getCards: () => void;
-  cardId: number;
+  cardId?: number;
+  cardData?: CardDetail;
 }
 
 const CardDetailKebap = ({ cardId, getCards, cardData }: ModalProps) => {
@@ -23,14 +26,11 @@ const CardDetailKebap = ({ cardId, getCards, cardData }: ModalProps) => {
     >
       <img
         className={styles['kebabIcon']}
+        alt="kebab menu icon"
         src="/assets/icon/kebabMenuIcon.svg"
       />
       {view && (
-        <KebapMenu
-          cardId={cardId}
-          getCards={getCards}
-          cardData={cardData}
-        ></KebapMenu>
+        <KebapMenu cardId={cardId} getCards={getCards} cardData={cardData} />
       )}
     </div>
   );

@@ -7,7 +7,7 @@ const cn = classNames.bind(styles);
 interface Props {
   size: 'small' | 'big';
   onImageSelected: (imageUrl: string) => void;
-  initialImageUrl: string;
+  initialImageUrl?: string;
 }
 export default function ProfileImageInput({
   size,
@@ -56,13 +56,7 @@ export default function ProfileImageInput({
         >
           <Image
             layout="fill"
-            src={
-              imageUrl
-                ? imageUrl
-                : initialImageUrl
-                  ? initialImageUrl
-                  : '/assets/icon/plusIcon.svg'
-            }
+            src={imageUrl || initialImageUrl || '/assets/icon/plusIcon.svg'}
             alt={imageUrl ? '불러온 이미지' : '+ 아이콘'}
             priority={true}
             objectFit="cover"

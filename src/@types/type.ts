@@ -37,6 +37,7 @@ export interface CreateDoItYourselfProps
 
 // 담당자 드롭다운 멤버 프로필
 export interface MemberProfile {
+  id: number;
   nickname: string;
   profileImageUrl: string;
 }
@@ -130,6 +131,17 @@ export interface Card {
   imageUrl: string;
 }
 
+export interface CardDetail {
+  title: string;
+  assignee?: MemberProfile;
+  dueDate: string;
+  tags: string[];
+  description: string;
+  imageUrl: string;
+  columnId: number;
+  dashboardId: number;
+}
+
 export interface Member extends MemberProfile {
   teamId: string;
   page?: number;
@@ -139,7 +151,7 @@ export interface Member extends MemberProfile {
 
 export interface Column {
   id: number;
-  title?: string;
+  title: string;
   teamId: string;
   dashboardId: number;
   createdAt?: string;

@@ -1,3 +1,4 @@
+import { CardDetail } from '@/@types/type';
 import DeleteCardModal from '@/components/molecules/modals/deleteCardModal/DeleteCardModal';
 import EditCardModal from '@/components/molecules/modals/editCardModal/EditCardModal';
 import { useState } from 'react';
@@ -5,7 +6,8 @@ import styles from './kebapMenu.module.scss';
 
 interface ModalProps {
   getCards: () => void;
-  cardId: number;
+  cardId?: number;
+  cardData: CardDetail;
 }
 
 const KebapMenu = ({ cardId, getCards, cardData }: ModalProps) => {
@@ -44,7 +46,7 @@ const KebapMenu = ({ cardId, getCards, cardData }: ModalProps) => {
         삭제하기
       </div>
       {showEditCardModal && (
-        <EditCardModal onClose={closeModal} cardData={cardData}></EditCardModal>
+        <EditCardModal onClose={closeModal} cardData={cardData} />
       )}
       {showDeleteCardModal && (
         <DeleteCardModal

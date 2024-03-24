@@ -1,17 +1,16 @@
-import { Card, Column, Member } from '@/@types/type';
-import { getMember } from '@/api/members/memberApi';
+import { Card, Column } from '@/@types/type';
+import { createCard } from '@/api/cards/cardApi';
+import { uploadCardImage } from '@/api/columns/columnApi';
 import Button from '@/components/atoms/buttons/button';
 import CreateDoItYourselfDate from '@/components/atoms/input/dateInput/CreateDoItYourselfDate';
 import CreateDoItYourselfDescription from '@/components/atoms/input/descriptionInput/CreateDoItYourselfDescription';
 import CreateDoItYourselfTitle from '@/components/atoms/input/titleInput/CreateDoItYourselfTitle';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import ImageInput from '../../imageInput/ImageInput';
 import CreateDoItYourselfTag from '../../input/CreateDoItYourselfTag';
 import ManagerDropDown from '../../managerDropDown/ManagerDropDown';
 import styles from './createCardModal.module.scss';
-import { uploadCardImage } from '@/api/columns/columnApi';
-import { createCard } from '@/api/cards/cardApi';
-import { useForm } from 'react-hook-form';
 
 interface ModalProps {
   column: Column;
@@ -20,7 +19,6 @@ interface ModalProps {
 
 export default function CreateCardModal({ column, onClose }: ModalProps) {
   const image = useRef<File>();
-  const [members, setMembers] = useState<Member[]>([]); // 멤버 상태 추가
   const { getValues, handleSubmit, register, setValue } = useForm<Card>({
     defaultValues: {
       columnId: column.id,
@@ -28,21 +26,6 @@ export default function CreateCardModal({ column, onClose }: ModalProps) {
     },
     mode: 'all',
   });
-  const dashboardId = column.dashboardId;
-
-  useEffect(() => {
-    async function fetchMembers() {
-      try {
-        const memberData = await getMember(dashboardId); // 멤버 목록 가져오기
-        setMembers(memberData.members); // Fix: Pass memberData as an array
-      } catch (error) {
-        console.error('Error fetching members:', error);
-      }
-    }
-
-    fetchMembers();
-  }, []); // 컴포넌트가 마운트될 때만 실행
-  console.log(members);
 
   const onSubmit = async () => {
     try {
@@ -64,10 +47,7 @@ export default function CreateCardModal({ column, onClose }: ModalProps) {
       <form className={styles.modalContent} onSubmit={handleSubmit(onSubmit)}>
         <h1 className={styles.modalTitle}>할 일 생성</h1>
         <ManagerDropDown
-          members={members}
-          {...register('assigneeUserId', {
-            required: '담당자를 선택해주세요.',
-          })}
+          onChange={(assignee) => setValue('assigneeUserId', assignee.id)}
         />
         <CreateDoItYourselfTitle
           {...register('title', {
