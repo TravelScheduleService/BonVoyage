@@ -156,6 +156,7 @@ export default function CardDetailModal({
               <h2 className={styles['infoTitle']}>담당자</h2>
               <div className={styles['userInfo']}>
                 <Image
+                  className={styles['profileImage']}
                   width={22}
                   height={22}
                   src={
