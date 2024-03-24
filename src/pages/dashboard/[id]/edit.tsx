@@ -1,4 +1,4 @@
-import { ID, RouterQuery } from '@/@types/type';
+import { ID } from '@/@types/type';
 import { deleteDashboard } from '@/api/dashboardInfoApi/dashboardInfoApi';
 import EventDashboardBtn from '@/components/atoms/buttons/eventDashboardBtn';
 import SideBar from '@/components/atoms/sideBar/SideBar';
@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import leftArrowIcon from '/public/assets/icon/leftArrowIcon.svg';
 
-export default function editdashboard() {
+export default function EditDashboard() {
   const router = useRouter();
   const { id } = router.query as { id: ID };
   const goBack = () => {

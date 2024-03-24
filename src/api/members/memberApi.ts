@@ -25,12 +25,11 @@ export const deleteMember = async (memberId: number) => {
     const res = await instance.delete<Member>(`/members/${memberId}`);
   } catch (error) {
     console.error('deleteMember:', getErrorMessage(error));
-    console.log(memberId);
   }
 };
 
 //초대목록 불러오기
-export async function getInvitedMemberList(dashboardId: number) {
+export async function getInvitedMemberList(dashboardId: ID) {
   try {
     const res = await instance.get(`dashboards/${dashboardId}/invitations`, {
       headers: {
@@ -46,7 +45,7 @@ export async function getInvitedMemberList(dashboardId: number) {
 
 // 초대 취소
 export const deleteInvitation = async (
-  dashboardId: number,
+  dashboardId: ID,
   invitationId: number,
 ) => {
   try {
@@ -55,6 +54,5 @@ export const deleteInvitation = async (
     );
   } catch (error) {
     console.error('deleteInvitation:', getErrorMessage(error));
-    console.log(invitationId);
   }
 };

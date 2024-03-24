@@ -23,22 +23,22 @@ export default function InviteList({ dashboardId }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [members, setMembers] = useState<Member[]>([]);
 
-  async function fetchMembers() {
-    try {
-      const memberData = await getInvitedMemberList(dashboardId);
-      setMembers(memberData.invitations);
-    } catch (error) {
-      console.error('Error fetching members:', error);
-    }
-  }
   useEffect(() => {
+    async function fetchMembers() {
+      try {
+        const memberData = await getInvitedMemberList(dashboardId);
+        setMembers(memberData.invitations);
+      } catch (error) {
+        console.error('Error fetching members:', error);
+      }
+    }
     fetchMembers();
   }, [dashboardId]);
 
-  async function onClickDelete(dashboardId: number, invitationId: number) {
+  async function onClickDelete(dashboardId: ID, invitationId: number) {
     try {
       await deleteInvitation(dashboardId, invitationId);
-      fetchMembers();
+      window.location.reload();
     } catch (error) {
       console.error('delete error:', error);
     }
@@ -80,12 +80,7 @@ export default function InviteList({ dashboardId }: Props) {
           </div>
         ))}
       </div>
-      {isModalOpen && (
-        <InviteMemberModal
-          onClose={closeModal}
-          refreshMember={fetchMembers}
-        ></InviteMemberModal>
-      )}
+      {isModalOpen && <InviteMemberModal onClose={closeModal} />}
     </div>
   );
 }
