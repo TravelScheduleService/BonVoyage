@@ -95,11 +95,13 @@ export default function Card({
           <div className={styles['infoArea']}>
             <span className={styles['cardTitle']}>{card.title}</span>
             <div className={styles['tagDateArea']}>
-              <div className={styles['tagArea']}>
-                {card.tags.map((tag, index) => (
-                  <ChipTagWithoutX tag={tag} color={colors[index % 4]} />
-                ))}
-              </div>
+              {card.tags && (
+                <div className={styles['tagArea']}>
+                  {card.tags.map((tag, index) => (
+                    <ChipTagWithoutX tag={tag} color={colors[index % 4]} />
+                  ))}
+                </div>
+              )}
 
               <div className={styles['dateProfileArea']}>
                 <div className={styles['dateArea']}>
