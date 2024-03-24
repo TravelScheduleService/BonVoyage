@@ -3,18 +3,15 @@ import styles from './createColumnModal.module.scss';
 import Button from '@/components/atoms/buttons/button';
 import ColumnNameInput from '@/components/atoms/input/columnNameInput/ColumnNameInput';
 import instance from '@/api/axios';
+import { useDashboardState } from '@/hooks/contexts';
 
 interface ModalProps {
   onClose: () => void;
   getColumns: () => void;
-  dashboardId: number;
 }
 
-export default function CreateColumnModal({
-  onClose,
-  dashboardId,
-  getColumns,
-}: ModalProps) {
+export default function CreateColumnModal({ onClose, getColumns }: ModalProps) {
+  const [dashboard] = useDashboardState();
   const [columnName, setColumnName] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +22,7 @@ export default function CreateColumnModal({
     try {
       const columnData = {
         title: columnName,
-        dashboardId: dashboardId,
+        dashboardId: dashboard?.id,
       };
       const res = await instance.post('/columns', columnData, {
         headers: {
@@ -48,12 +45,7 @@ export default function CreateColumnModal({
         <ColumnNameInput value={columnName} onChange={handleInputChange} />
 
         <div className={styles['buttonArea']}>
-          <Button
-            name="취소"
-            type="modal"
-            color="white"
-            onClick={onClose}
-          />
+          <Button name="취소" type="modal" color="white" onClick={onClose} />
           <Button
             name="생성"
             type="modal"

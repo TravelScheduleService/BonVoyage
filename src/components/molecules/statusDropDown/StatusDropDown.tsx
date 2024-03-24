@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import styles from './statusDropDown.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import ChipProgress from '../ChipProgress/ChipProgress';
+import { useState } from 'react';
+import ChipProgress from '../chipProgress/ChipProgress';
+import styles from './statusDropDown.module.scss';
 
 const cn = classNames.bind(styles);
 
@@ -53,6 +53,7 @@ export default function StatusDropDown({ items, title, columnTitle }: Props) {
 
               return (
                 <div
+                  key={element}
                   className={cn('itemBox')}
                   onClick={() => onClickItem(element)}
                 >

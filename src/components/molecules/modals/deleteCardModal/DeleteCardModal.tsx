@@ -19,7 +19,6 @@ export default function DeleteCardModal({
       await instance.delete(`/cards/${cardId}`);
       getCards();
       onClose();
-      console.log('삭제');
     } catch (error) {
       console.error('Error deleting card:', error);
     }

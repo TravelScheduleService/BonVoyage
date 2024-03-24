@@ -188,9 +188,10 @@ export default function CardDetailModal({
               <div className={styles['tag']}>
                 {cardDetail.tags.map((tag, index) => (
                   <ChipTagWithoutX
+                    key={tag}
                     tag={tag}
                     color={colors[index % 4]}
-                  ></ChipTagWithoutX>
+                  />
                 ))}
               </div>
             </div>

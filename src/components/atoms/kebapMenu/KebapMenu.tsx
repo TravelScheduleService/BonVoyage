@@ -64,7 +64,7 @@ const KebapMenu = ({
           onClose={closeModal}
           cardId={cardId}
           getCards={getCards}
-        ></DeleteCardModal>
+        />
       )}
     </div>
   );

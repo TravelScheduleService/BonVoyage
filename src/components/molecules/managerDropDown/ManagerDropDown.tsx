@@ -26,7 +26,6 @@ export default function ManagerDropDown({
   inputProps = {},
   onChange,
 }: Props) {
-  console.log({ defaultValue });
   const [dashboard] = useDashboardState();
   const [members, setMembers] = useState<Member[]>([]);
   const [manager, setManager] = useState<MemberProfile | undefined>(

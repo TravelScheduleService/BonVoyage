@@ -74,11 +74,7 @@ export default function DashboardPage() {
           </div>
         </section>
         {isModalOpen && (
-          <CreateColumnModal
-            onClose={closeModal}
-            dashboardId={Number(id)}
-            getColumns={getColumns}
-          />
+          <CreateColumnModal onClose={closeModal} getColumns={getColumns} />
         )}
       </DashboardProvider>
     </div>

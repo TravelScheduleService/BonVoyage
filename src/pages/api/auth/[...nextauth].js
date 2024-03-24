@@ -7,20 +7,15 @@ export default NextAuth({
     async jwt({ token, session, user }) {
       if (token.accessToken) {
         if (session) {
-          console.log('session', session);
           session.accessToken = token.accessToken;
         }
       } else if (user) {
         const { accessToken } = user;
         token.accessToken = accessToken;
       }
-      if (session) {
-        console.log('session', session);
-      }
       return token;
     },
     async session({ session, token, user }) {
-      console.log('session()', { session, token });
       if (token) {
         session.accessToken = token.accessToken;
       }

@@ -46,7 +46,6 @@ export default function SignUp() {
     register,
     formState: { errors, isValid },
   } = form;
-  console.log({ errors, isValid });
 
   const onSubmit: SubmitHandler<SignUpProps> = async (data: AuthRequest) => {
     try {

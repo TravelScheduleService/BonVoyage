@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import styles from './inviteMemberModal.module.scss';
-
-import { ID } from '@/@types/type';
 import instance from '@/api/axios';
 import Button from '@/components/atoms/buttons/button';
 import InviteInput from '@/components/atoms/input/inviteInput/inviteInput';
-import { useRouter } from 'next/router';
+import { useDashboardState } from '@/hooks/contexts';
 
 interface ModalProps {
   onClose: () => void;
@@ -16,9 +14,8 @@ export default function InviteMemberModal({
   onClose,
   refreshMember,
 }: ModalProps) {
+  const [dashboard] = useDashboardState();
   const [email, setEmail] = useState('');
-  const router = useRouter();
-  const { id } = router.query as { id: ID };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -30,7 +27,7 @@ export default function InviteMemberModal({
         email: email,
       };
       const res = await instance.post(
-        `/dashboards/${id}/invitations`,
+        `/dashboards/${dashboard?.id}/invitations`,
         inviteData,
         {
           headers: {
