@@ -30,12 +30,7 @@ export default function DeleteColumnModal({
         <h1 className={styles['modalTitle']}>컬럼의 모든 카드가 삭제됩니다.</h1>
 
         <div className={styles['buttonArea']}>
-          <Button
-            name="취소"
-            type="modal"
-            color="white"
-            onClick={onClose}
-          ></Button>
+          <Button name="취소" type="modal" color="white" onClick={onClose} />
           <Button
             name="삭제"
             type="modal"

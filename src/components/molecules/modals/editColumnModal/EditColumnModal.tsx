@@ -50,18 +50,13 @@ export default function EditColumnModal({
         <ColumnNameInput
           value={editedColumnName}
           onChange={handleInputChange}
-        ></ColumnNameInput>
+        />
         <span className={styles['deleteButton']} onClick={handleDeleteClick}>
           삭제하기
         </span>
 
         <div className={styles['buttonArea']}>
-          <Button
-            name="취소"
-            type="modal"
-            color="white"
-            onClick={onClose}
-          ></Button>
+          <Button name="취소" type="modal" color="white" onClick={onClose} />
           <Button
             name="변경"
             type="modal"
@@ -75,7 +70,7 @@ export default function EditColumnModal({
           onClose={closeModal}
           getColumns={getColumns}
           columnId={columnId}
-        ></DeleteColumnModal>
+        />
       )}
     </div>
   );
