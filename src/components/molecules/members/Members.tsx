@@ -30,7 +30,6 @@ export default function Members({ dashboardId }: Props) {
     try {
       await deleteMember(id);
     } catch (error) {
-      console.log(id);
       console.error('delete error:', error);
     }
   }

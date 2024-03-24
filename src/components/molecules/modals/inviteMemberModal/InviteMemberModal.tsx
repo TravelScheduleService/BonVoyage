@@ -29,7 +29,6 @@ export default function InviteMemberModal({
       const inviteData = {
         email: email,
       };
-      console.log(id, email);
       const res = await instance.post(
         `/dashboards/${id}/invitations`,
         inviteData,
@@ -59,12 +58,7 @@ export default function InviteMemberModal({
         <InviteInput value={email} onChange={handleInputChange} />
 
         <div className={styles['buttonArea']}>
-          <Button
-            name="취소"
-            type="modal"
-            color="white"
-            onClick={onClose}
-          ></Button>
+          <Button name="취소" type="modal" color="white" onClick={onClose} />
           <Button
             name="초대"
             type="modal"

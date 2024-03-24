@@ -44,7 +44,6 @@ export default function EditDashboardTitle() {
   }, [id]);
 
   if (!dashboardInfo) return null;
-  console.log(dashboardInfo);
 
   const onSubmit = async () => {
     try {
