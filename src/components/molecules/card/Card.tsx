@@ -7,6 +7,7 @@ import instance from '@/api/axios';
 import { format } from 'date-fns';
 import CardDetailModal from '../modals/cardDetailModal/CardDetailModal';
 import ProfileIcon from '@/components/atoms/profileIcon/ProfileIcon';
+import { triggerAsyncId } from 'async_hooks';
 
 interface Card {
   id: number;
@@ -99,7 +100,7 @@ export default function Card({
                 <div className={styles['tagArea']}>
                   {card.tags.map((tag, index) => (
                     <ChipTagWithoutX
-                      key={tag}
+                      key={index}
                       tag={tag}
                       color={colors[index % 4]}
                     />

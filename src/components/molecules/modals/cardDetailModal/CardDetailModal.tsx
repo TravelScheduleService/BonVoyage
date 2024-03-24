@@ -184,11 +184,11 @@ export default function CardDetailModal({
           <div className={styles['contentArea']}>
             <div className={styles['tagArea']}>
               <ChipProgress column={columnTitle} />
-              <div className={styles['line']}></div>
+              <div className={styles['line']} />
               <div className={styles['tag']}>
                 {cardDetail.tags.map((tag, index) => (
                   <ChipTagWithoutX
-                    key={tag}
+                    key={tag.id}
                     tag={tag}
                     color={colors[index % 4]}
                   />
