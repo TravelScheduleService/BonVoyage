@@ -20,6 +20,13 @@ interface Card {
   };
 }
 
+const colors: Array<'orange' | 'pink' | 'blue' | 'green'> = [
+  'orange',
+  'green',
+  'pink',
+  'blue',
+];
+
 interface CardProps {
   columnId: number;
   columnTitle: string;
@@ -89,7 +96,9 @@ export default function Card({
             <span className={styles['cardTitle']}>{card.title}</span>
             <div className={styles['tagDateArea']}>
               <div className={styles['tagArea']}>
-                <ChipTagWithoutX tag={card.tags.join(' ')} color="pink" />
+                {card.tags.map((tag, index) => (
+                  <ChipTagWithoutX tag={tag} color={colors[index % 4]} />
+                ))}
               </div>
 
               <div className={styles['dateProfileArea']}>
