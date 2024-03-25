@@ -1,6 +1,7 @@
 # <img src='./public//assets//icon//bonVoyageLogo.svg' width='200px'>
 
-<img src='https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FurxJN%2FbtsFXJybaub%2FLop2rHy903EaSdnXENKcPk%2Fimg.png' width='600'>
+
+![2024-03-25 13;50;39](https://github.com/TravelScheduleService/BonVoyage/assets/113954463/2871cc10-21d0-452a-9348-7f997345b841)
 
 <br>
 
