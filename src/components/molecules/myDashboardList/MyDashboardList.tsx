@@ -45,6 +45,7 @@ export default function MyDashboardList({
     const response = await postNewDashboard(createDashboard);
 
     router.push(`/dashboard/${response.id}`);
+    setIsOpenModal(false);
   };
 
   return (
