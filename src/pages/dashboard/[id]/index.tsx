@@ -60,7 +60,7 @@ export default function DashboardPage() {
 
   return (
     <div className={styles['background']}>
-      <DashboardProvider initialValue={dashboard}>
+      <DashboardProvider initialValue={id}>
         <HeaderMyDashboard isDashboard={true} />
         <SideBar />
         <section className={styles['section']}>
